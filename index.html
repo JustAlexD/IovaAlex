@@ -13,7 +13,7 @@ body {
   color: #e2e8f0;
 }
 
-/* glow background */
+/* background glow */
 body::before {
   content: "";
   position: fixed;
@@ -36,6 +36,7 @@ nav {
   text-align: center;
   backdrop-filter: blur(10px);
   background: rgba(2,6,23,0.7);
+  z-index: 1000;
 }
 
 nav a {
@@ -43,6 +44,10 @@ nav a {
   color: #38bdf8;
   text-decoration: none;
   font-weight: bold;
+}
+
+nav a:hover {
+  color: #22c55e;
 }
 
 /* sections */
@@ -82,9 +87,10 @@ section {
   border-radius: 12px;
   margin-top: 15px;
   border: 1px solid rgba(56,189,248,0.2);
+
   opacity: 0;
   transform: translateY(40px);
-  transition: 0.8s;
+  transition: 0.8s ease;
 }
 
 .card.show {
@@ -115,6 +121,16 @@ section {
 
 .btn:hover {
   background: #0ea5e9;
+  transform: scale(1.05);
+}
+
+/* links */
+a {
+  color: #38bdf8;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 /* footer */
@@ -151,9 +167,9 @@ footer {
 <section id="about">
   <h2>About Me</h2>
   <div class="card">
-    I am a third-year student passionate about electronics, embedded systems,
-    and software development. I enjoy building practical projects that combine
-    hardware and software.
+    Third-year student at the Faculty of Electronics, Telecommunications and Information Technology,
+    passionate about embedded systems, electronics, and software development.
+    I enjoy building practical projects and learning new technologies.
   </div>
 </section>
 
@@ -163,12 +179,12 @@ footer {
 
   <div class="card">
     <h3>MySQL Web Application</h3>
-    <p>Java + Hibernate + JSP/Servlets CRUD web app.</p>
+    <p>Java 21 + Hibernate ORM + JSP/Servlets CRUD application deployed on Apache Tomcat.</p>
   </div>
 
   <div class="card">
     <h3>Laser Detection System</h3>
-    <p>ESP32 + GSM SIM800L automatic call security system.</p>
+    <p>ESP32-based security system using GSM SIM800L for automatic calling alerts.</p>
   </div>
 </section>
 
@@ -180,10 +196,12 @@ footer {
     <span>C/C++</span>
     <span>Python</span>
     <span>MySQL</span>
+    <span>Hibernate</span>
     <span>Linux</span>
-    <span>OrCAD</span>
-    <span>MATLAB</span>
     <span>SystemVerilog</span>
+    <span>MATLAB</span>
+    <span>OrCAD</span>
+    <span>Embedded Systems</span>
   </div>
 </section>
 
@@ -192,8 +210,20 @@ footer {
   <h2>Contact</h2>
   <div class="card">
     <p>📧 iovaalex1234@gmail.com</p>
-    <p>💼 GitHub: JustAlexD</p>
-    <p>🔗 LinkedIn: your profile</p>
+
+    <p>
+      💼 GitHub: 
+      <a href="https://github.com/JustAlexD" target="_blank">
+        JustAlexD
+      </a>
+    </p>
+
+    <p>
+      🔗 LinkedIn: 
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/?skipRedirect=true" target="_blank">
+        Profile
+      </a>
+    </p>
   </div>
 </section>
 
