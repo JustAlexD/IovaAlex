@@ -6,18 +6,18 @@
 <title>Iova Alex | Portfolio</title>
 
 <style>
-:root {
-  --bg: #020617;
-  --text: #e2e8f0;
-  --card: rgba(15,23,42,0.55);
-  --accent: #38bdf8;
+:root{
+  --bg:#020617;
+  --text:#e2e8f0;
+  --card:rgba(30,41,59,0.6);
+  --accent:#38bdf8;
 }
 
-body.light {
-  --bg: #f8fafc;
-  --text: #0f172a;
-  --card: rgba(255,255,255,0.7);
-  --accent: #0284c7;
+body.light{
+  --bg:#f1f5f9;
+  --text:#0f172a;
+  --card:rgba(255,255,255,0.7);
+  --accent:#0ea5e9;
 }
 
 body {
@@ -25,7 +25,7 @@ body {
   font-family: Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  transition: 0.5s ease;
+  transition:0.3s;
 }
 
 body::before {
@@ -47,8 +47,8 @@ nav {
   top: 0;
   padding: 15px;
   text-align: center;
-  backdrop-filter: blur(12px);
-  background: rgba(2,6,23,0.6);
+  backdrop-filter: blur(10px);
+  background: rgba(2,6,23,0.7);
   z-index: 1000;
 }
 
@@ -59,30 +59,21 @@ nav a {
   font-weight: bold;
 }
 
-#toggleTheme {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  cursor: pointer;
-  padding: 8px 12px;
-  border-radius: 6px;
-  background: var(--accent);
-  color: black;
-  border: none;
+#toggleTheme{
+  position:absolute;
+  right:20px;
+  top:15px;
+  cursor:pointer;
+  background:var(--accent);
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
 }
 
 section {
   padding: 120px 20px;
   max-width: 1000px;
   margin: auto;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.6s;
-}
-
-section.show {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 #home {
@@ -91,47 +82,61 @@ section.show {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align:center;
+}
+
+.hero-name{
+  font-size:50px;
+  font-weight:bold;
+  background: linear-gradient(90deg,#38bdf8,#22c55e,#a78bfa);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation: glow 3s infinite alternate;
+}
+
+@keyframes glow{
+  from{filter: drop-shadow(0 0 5px #38bdf8);}
+  to{filter: drop-shadow(0 0 20px #22c55e);}
 }
 
 .card {
   background: var(--card);
-  backdrop-filter: blur(18px);
+  backdrop-filter: blur(12px);
   padding: 20px;
-  border-radius: 14px;
+  border-radius: 12px;
   margin-top: 20px;
   border: 1px solid rgba(56,189,248,0.2);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
+}
+
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
   margin-top: 20px;
 }
 
-.project-item {
-  background: var(--card);
-  padding: 15px;
-  border-radius: 12px;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(56,189,248,0.2);
-}
-
-.project-item img {
+.img-box img {
   width: 100%;
   border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.project-item img:hover {
+.img-box img:hover {
   transform: scale(1.05);
 }
 
-.overlay-text {
-  margin-top: 10px;
+.img-box p {
   font-size: 13px;
-  color: var(--text);
+  color: gray;
 }
 
 .btn {
@@ -143,51 +148,21 @@ section.show {
   cursor: pointer;
 }
 
-#modal {
+#lightbox {
   display: none;
   position: fixed;
-  z-index: 2000;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.9);
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  opacity: 0;
-  transition: 0.4s;
 }
 
-#modal.show {
-  opacity: 1;
-}
-
-#modal img {
+#lightbox img {
   max-width: 90%;
-  max-height: 70%;
-  border-radius: 10px;
-  transform: scale(0.7);
-  transition: 0.4s;
-}
-
-#modal.show img {
-  transform: scale(1);
-}
-
-#modal p {
-  margin-top: 15px;
-  max-width: 800px;
-  text-align: center;
-}
-
-#closeModal {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 32px;
-  cursor: pointer;
+  max-height: 90%;
 }
 
 footer {
@@ -209,53 +184,65 @@ footer {
 </nav>
 
 <section id="home">
-  <h1>Iova Alex</h1>
+  <h1 class="hero-name">Iova Alex</h1>
   <p>Electronics & IT Student</p>
-  <a href="#projects"><button class="btn">View Projects</button></a>
+  <p>📍 Bucharest</p>
+
+  <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download>
+    <button class="btn">Download CV</button>
+  </a>
 </section>
 
 <section id="about">
   <h2>About</h2>
   <div class="card">
-    Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, with a strong interest in continuous learning and personal development. I am a sociable and adaptable person, able to work effectively both independently and as part of a team.
+    Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, with a strong interest in continuous learning and personal development. I am a sociable and adaptable person, able to work effectively both independently and as part of a team. I have good communication skills, a proactive mindset, and a strong sense of responsibility. I enjoy solving problems, taking initiative, and contributing to projects in a structured and organized manner. I am motivated to grow professionally and take on new challenges in the field of technology.
   </div>
 </section>
 
 <section id="projects">
   <h2>Projects</h2>
 
-  <div class="gallery">
+  <div class="card">
+    <h3>MySQL Web Application</h3>
+    <p>Web application built with Java, Hibernate, JSP and MySQL.</p>
 
-    <div class="project-item">
-      <img src="images/users.png" data-desc="Users management page with CRUD operations.">
-      <div class="overlay-text">Users Management</div>
+    <div class="gallery">
+      <div class="img-box">
+        <img src="poze/users.png">
+        <p>Aceasta pagina afiseaza lista tuturor utilizatorilor existenti in baza de date sub forma unui tabel. Utilizatorul poate vizualiza informatiile disponibile si poate accesa actiunile de adaugare, modificare sau stergere a inregistrarilor.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/os.png">
+        <p>Pagina dedicata sistemelor de operare permite afisarea tuturor sistemelor existente in baza de date. Fiecare inregistrare poate fi modificata sau stearsa, iar utilizatorul are posibilitatea de a adauga sisteme noi.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/installations.png">
+        <p>Aceasta pagina afiseaza toate instalarile realizate, incluzand utilizatorul, sistemul de operare, data instalarii si dispozitivul asociat. Informatiile sunt prezentate intr-un tabel.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/form.png">
+        <p>Formularul de adaugare a unei instalari permite selectarea unui utilizator si a unui sistem de operare din liste derulante dinamice, populate automat din baza de date.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/database.png">
+        <p>Interfata utilizator a aplicatiei este realizata folosind JSP si HTML, avand ca scop oferirea unei experiente de utilizare simple si intuitive.</p>
+      </div>
     </div>
-
-    <div class="project-item">
-      <img src="images/os.png" data-desc="Operating systems management with full database control.">
-      <div class="overlay-text">OS Management</div>
-    </div>
-
-    <div class="project-item">
-      <img src="images/installations.png" data-desc="Installations table with user, OS, date and device info.">
-      <div class="overlay-text">Installations</div>
-    </div>
-
-    <div class="project-item">
-      <img src="images/form.png" data-desc="Dynamic form with dropdowns populated from database.">
-      <div class="overlay-text">Form</div>
-    </div>
-
-    <div class="project-item">
-      <img src="images/database.png" data-desc="JSP + HTML UI providing intuitive navigation.">
-      <div class="overlay-text">Database UI</div>
-    </div>
-
   </div>
 
   <div class="card">
-    <h3>Low-Frequency Voltage Amplifier (OrCAD)</h3>
-    <p>Designed and simulated amplifier, analyzed behavior, and implemented in lab.</p>
+    <h3>Laser Detection System</h3>
+    <p>ESP32 + GSM SIM800L security system.</p>
+  </div>
+
+  <div class="card">
+    <h3>Low-Frequency Voltage Amplifier (OrCAD 17.2)</h3>
+    <p>Designed and simulated an amplifier using OrCAD. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress).</p>
   </div>
 
 </section>
@@ -263,66 +250,55 @@ footer {
 <section id="skills">
   <h2>Skills</h2>
   <div class="card">
-    Java, C/C++, Python, MySQL, Linux, MATLAB
+    <span>Java</span>
+    <span>C/C++</span>
+    <span>Python</span>
+    <span>MySQL</span>
+    <span>Linux</span>
+    <span>MATLAB</span>
   </div>
 </section>
 
 <section id="contact">
   <h2>Contact</h2>
   <div class="card">
-    Email: iovaalex1234@gmail.com
+    <p>📧 iovaalex1234@gmail.com</p>
+    <p><a href="https://github.com/JustAlexD" target="_blank">GitHub</a></p>
+    <p><a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank">LinkedIn</a></p>
   </div>
 </section>
 
 <footer>
-  © 2026 Iova Alex
+© 2026 Iova Alex
 </footer>
 
-<div id="modal">
-  <span id="closeModal">&times;</span>
-  <img id="modalImg">
-  <p id="modalDesc"></p>
+<div id="lightbox">
+  <img id="lightbox-img">
 </div>
 
 <script>
-// section animations
-const sections = document.querySelectorAll("section");
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
+const cards=document.querySelectorAll('.card');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')});
 });
-sections.forEach(s => observer.observe(s));
+cards.forEach(c=>observer.observe(c));
 
-// modal
-const modal = document.getElementById("modal");
-const modalImg = document.getElementById("modalImg");
-const modalDesc = document.getElementById("modalDesc");
-const closeModal = document.getElementById("closeModal");
+const images=document.querySelectorAll('.gallery img');
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
 
-document.querySelectorAll(".project-item img").forEach(img => {
-  img.addEventListener("click", () => {
-    modal.style.display = "flex";
-    setTimeout(()=> modal.classList.add("show"), 10);
-    modalImg.src = img.src;
-    modalDesc.textContent = img.dataset.desc;
+images.forEach(img=>{
+  img.addEventListener('click',()=>{
+    lightbox.style.display='flex';
+    lightboxImg.src=img.src;
   });
 });
 
-function closeModalFunc(){
-  modal.classList.remove("show");
-  setTimeout(()=> modal.style.display="none",300);
-}
-
-closeModal.onclick = closeModalFunc;
-modal.onclick = e => { if(e.target === modal) closeModalFunc(); };
+lightbox.onclick=()=>lightbox.style.display='none';
 
 // theme toggle
-const toggle = document.getElementById("toggleTheme");
-toggle.onclick = () => {
-  document.body.classList.toggle("light");
+document.getElementById('toggleTheme').onclick=()=>{
+  document.body.classList.toggle('light');
 };
 </script>
 
