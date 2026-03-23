@@ -1,579 +1,353 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iova Alex | Interactive Tech Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+<title>Iova Alex | Minimalist Architecture Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-/* === VARIABILE & SETUP === */
-:root {
-  --bg-color: #050508;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --card-bg: rgba(20, 20, 30, 0.3);
-  --card-border: rgba(0, 243, 255, 0.15);
-  --accent-cyan: #00f3ff;
-  --accent-purple: #bd00ff;
-  --accent-green: #00ff66;
-  --nav-bg: rgba(5, 5, 8, 0.8);
-}
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: { sans: ['Inter', 'sans-serif'] },
+        colors: {
+          border: "hsl(var(--border))",
+          input: "hsl(var(--input))",
+          ring: "hsl(var(--ring))",
+          background: "hsl(var(--background))",
+          foreground: "hsl(var(--foreground))",
+          primary: {
+            DEFAULT: "hsl(var(--primary))",
+            foreground: "hsl(var(--primary-foreground))",
+          },
+          secondary: {
+            DEFAULT: "hsl(var(--secondary))",
+            foreground: "hsl(var(--secondary-foreground))",
+          },
+          muted: {
+            DEFAULT: "hsl(var(--muted))",
+            foreground: "hsl(var(--muted-foreground))",
+          },
+          accent: {
+            DEFAULT: "hsl(var(--accent))",
+            foreground: "hsl(var(--accent-foreground))",
+          },
+          card: {
+            DEFAULT: "hsl(var(--card))",
+            foreground: "hsl(var(--card-foreground))",
+          },
+        },
+        borderRadius: {
+          lg: "var(--radius)",
+          md: "calc(var(--radius) - 2px)",
+          sm: "calc(var(--radius) - 4px)",
+        },
+      }
+    }
+  }
+</script>
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  cursor: none; 
-}
+<style type="text/tailwindcss">
+  @layer base {
+    :root {
+      /* Pure Architecture Palette - Light Mode */
+      --background: 0 0% 100%;
+      --foreground: 0 0% 0%;
+      --card: 0 0% 100%;
+      --card-foreground: 0 0% 0%;
+      --popover: 0 0% 100%;
+      --popover-foreground: 0 0% 0%;
+      --primary: 0 0% 0%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 0 0% 96%;
+      --secondary-foreground: 0 0% 0%;
+      --muted: 0 0% 96%;
+      --muted-foreground: 0 0% 40%;
+      --accent: 0 0% 95%;
+      --accent-foreground: 0 0% 0%;
+      --border: 0 0% 90%;
+      --input: 0 0% 95%;
+      --ring: 0 0% 0%;
+      --radius: 0.5rem;
+      
+      --gradient-overlay: linear-gradient(180deg, hsl(0 0% 0% / 0.9), hsl(0 0% 0% / 0.1));
+    }
 
-html { scroll-behavior: smooth; }
+    .dark {
+      /* Pure Architecture Palette - Dark Mode */
+      --background: 0 0% 5%;
+      --foreground: 0 0% 100%;
+      --card: 0 0% 8%;
+      --card-foreground: 0 0% 100%;
+      --popover: 0 0% 5%;
+      --popover-foreground: 0 0% 100%;
+      --primary: 0 0% 100%;
+      --primary-foreground: 0 0% 0%;
+      --secondary: 0 0% 12%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 0 0% 12%;
+      --muted-foreground: 0 0% 60%;
+      --accent: 0 0% 15%;
+      --accent-foreground: 0 0% 100%;
+      --border: 0 0% 15%;
+      --input: 0 0% 10%;
+      --ring: 0 0% 100%;
+    }
+  }
 
-body {
-  font-family: 'Outfit', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-main);
-  overflow-x: hidden;
-}
+  @layer base {
+    * { @apply border-border; }
+    body { @apply bg-background text-foreground font-sans antialiased transition-colors duration-500; scroll-behavior: smooth; }
+    
+    .text-architectural { @apply tracking-[-0.02em] leading-[1.1]; }
+    .text-minimal { @apply tracking-widest uppercase text-xs font-medium; }
+    
+    .reveal {
+      @apply opacity-0 translate-y-8;
+      animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    
+    .reveal-delayed {
+      @apply opacity-0 translate-y-8;
+      animation: reveal 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    
+    @keyframes reveal {
+      to { @apply opacity-100 translate-y-0; }
+    }
 
-/* === FUNDAL PARTICULE === */
-#particle-canvas {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: -2;
-  background: radial-gradient(circle at center, #0a0a12 0%, #000000 100%);
-}
+    /* Ascunde referințele obligatorii ale sistemului AI */
+    .cite-hidden { display: none !important; }
+  }
 
-/* === CURSOR CUSTOM === */
-.cursor-dot {
-  position: fixed; top: 0; left: 0;
-  width: 8px; height: 8px;
-  background-color: var(--accent-cyan);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9999;
-  pointer-events: none;
-  box-shadow: 0 0 10px var(--accent-cyan);
-}
-
-.cursor-ring {
-  position: fixed; top: 0; left: 0;
-  width: 36px; height: 36px;
-  border: 2px solid var(--accent-purple);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 9998;
-  pointer-events: none;
-  transition: width 0.2s, height 0.2s;
-}
-
-/* === NAVIGARE === */
-nav {
-  position: fixed; width: 100%; top: 0;
-  padding: 20px 40px;
-  display: flex; justify-content: center; align-items: center; gap: 30px;
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  background: var(--nav-bg);
-  z-index: 1000;
-  border-bottom: 1px solid var(--card-border);
-}
-
-nav a {
-  color: var(--text-main); text-decoration: none;
-  font-weight: 600; font-size: 13px; letter-spacing: 2px;
-  text-transform: uppercase; position: relative; padding: 5px 0;
-  transition: 0.3s;
-}
-
-nav a::before {
-  content: ''; position: absolute; bottom: -2px; left: 0;
-  width: 0%; height: 2px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
-  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-nav a:hover::before { width: 100%; }
-nav a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
-
-/* === STRUCTURĂ SECȚIUNI === */
-section {
-  padding: 140px 20px 80px;
-  max-width: 1100px;
-  margin: auto;
-  position: relative;
-}
-
-/* === HERO SECTION === */
-#home {
-  height: 100vh;
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  text-align: center; padding: 0 20px;
-}
-
-.hero-name {
-  font-size: clamp(60px, 10vw, 100px);
-  font-weight: 800;
-  background: linear-gradient(to right, var(--accent-cyan), #ffffff, var(--accent-purple));
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shineText 5s linear infinite;
-  letter-spacing: 2px;
-  line-height: 1.1;
-  margin-bottom: 10px;
-}
-
-@keyframes shineText { to { background-position: 200% center; } }
-
-.hero-sub {
-  font-size: 18px; font-weight: 400; color: var(--text-muted);
-  letter-spacing: 3px; margin-bottom: 25px; min-height: 25px;
-}
-
-/* STATUS BADGE PENTRU ANGAJARE */
-.status-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(0, 255, 102, 0.1);
-  border: 1px solid rgba(0, 255, 102, 0.3);
-  padding: 10px 20px; border-radius: 30px;
-  font-size: 14px; font-weight: 600; color: var(--accent-green);
-  letter-spacing: 1px; margin-bottom: 30px;
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.1);
-  animation: floatBadge 3s ease-in-out infinite;
-}
-
-.status-badge .dot {
-  width: 10px; height: 10px;
-  background: var(--accent-green);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-green);
-  animation: pulseDot 1.5s infinite;
-}
-
-@keyframes pulseDot {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 102, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
-}
-@keyframes floatBadge {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-.btn {
-  padding: 15px 35px;
-  background: transparent; color: var(--text-main);
-  border: 1px solid var(--accent-cyan); border-radius: 30px;
-  font-family: inherit; font-weight: 600; font-size: 14px;
-  letter-spacing: 2px; text-transform: uppercase;
-  position: relative; overflow: hidden; transition: 0.4s; z-index: 1;
-  text-decoration: none; display: inline-block;
-}
-
-.btn::before {
-  content: ''; position: absolute;
-  top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
-  transition: 0.5s; z-index: -1;
-}
-
-.btn:hover::before { left: 100%; }
-.btn:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px var(--accent-cyan); }
-
-/* === TITLURI SECȚIUNI === */
-h2 {
-  font-size: 40px; font-weight: 800; letter-spacing: 2px;
-  text-transform: uppercase; margin-bottom: 50px;
-  display: flex; align-items: center; gap: 15px;
-}
-h2::before {
-  content: ''; display: block; width: 50px; height: 4px;
-  background: var(--accent-purple); box-shadow: 0 0 10px var(--accent-purple);
-}
-
-/* === CARDURI GLASSMORPHISM + 3D TILT === */
-.card {
-  background: var(--card-bg);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  padding: 40px; border-radius: 20px;
-  border: 1px solid var(--card-border);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-  margin-bottom: 30px; position: relative;
-  opacity: 0; transform: translateY(60px); transition: opacity 0.8s, transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.card.visible { opacity: 1; transform: translateY(0); }
-
-/* 3D Elements inside card */
-.card h3 { color: var(--accent-cyan); font-size: 24px; margin-bottom: 20px; transform: translateZ(40px); }
-.card p, .card ul { color: var(--text-muted); line-height: 1.8; font-size: 16px; transform: translateZ(20px); }
-.card ul { margin-left: 20px; margin-top: 10px; }
-.card strong { color: var(--text-main); }
-
-/* TIMELINE (Edu & Vol) */
-.timeline-box { transform: translateZ(30px); }
-.timeline-item { border-left: 2px solid var(--accent-purple); padding-left: 25px; margin-bottom: 30px; position: relative; }
-.timeline-item::before {
-  content: ''; position: absolute; left: -8px; top: 5px;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-cyan);
-}
-.date-badge {
-  display: inline-block; background: rgba(189, 0, 255, 0.15); border: 1px solid rgba(189, 0, 255, 0.4);
-  color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 12px;
-}
-
-/* GALERIE PROIECTE */
-.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; transform: translateZ(25px); }
-.img-box { border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); position: relative; }
-.img-box img { width: 100%; display: block; transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-.img-box:hover img { transform: scale(1.1); }
-.img-content { padding: 15px; background: rgba(5, 5, 10, 0.8); border-top: 1px solid rgba(255,255,255,0.05); }
-.img-content p { font-size: 13px; line-height: 1.5; color: #cbd5e1; }
-
-/* SKILLS */
-.skills-container { display: flex; flex-wrap: wrap; gap: 15px; transform: translateZ(30px); }
-.skill-tag {
-  background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.3);
-  padding: 10px 20px; border-radius: 8px; font-size: 15px; font-weight: 600;
-  transition: 0.3s;
-}
-.skill-tag:hover {
-  background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 243, 255, 0.4); transform: translateY(-5px);
-}
-
-/* LIGHTBOX */
-#lightbox {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
-  z-index: 2000; opacity: 0; transition: opacity 0.3s; backdrop-filter: blur(10px);
-}
-#lightbox.active { opacity: 1; }
-#lightbox img { max-width: 90%; max-height: 90%; border-radius: 12px; border: 1px solid var(--accent-purple); box-shadow: 0 0 40px rgba(189, 0, 255, 0.3); }
-
-footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--card-border); }
-
-/* MOBILE */
-@media (max-width: 768px) {
-  * { cursor: auto; } .cursor-dot, .cursor-ring { display: none; }
-  nav { padding: 15px; gap: 15px; justify-content: center; }
-  .hero-name { font-size: 50px; }
-  .card { transform: none !important; } 
-}
+  /* Imagine Lightbox Minimalist */
+  #lightbox {
+    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+    justify-content: center; align-items: center; z-index: 50;
+    opacity: 0; transition: opacity 0.3s ease;
+  }
+  #lightbox.active { opacity: 1; }
+  #lightbox img { max-width: 90%; max-height: 90%; border-radius: var(--radius); border: 1px solid #333; }
 </style>
 </head>
 
 <body>
 
-<canvas id="particle-canvas"></canvas>
-<div class="cursor-dot" id="cursor-dot"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
-
-<nav>
-  <a href="#home">Home</a>
-  <a href="#about">About</a>
-  <a href="#education">Education</a>
-  <a href="#projects">Projects</a>
-  <a href="#skills">Skills</a>
-  <a href="#volunteering">Volunteering</a>
-  <a href="#contact">Contact</a>
+<nav class="fixed top-0 w-full border-b border-border bg-background/80 backdrop-blur-md z-40 transition-colors duration-500">
+  <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="font-bold text-lg tracking-tight">Iova Alex.</div>
+    <div class="hidden md:flex gap-8">
+      <a href="#about" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">About</a>
+      <a href="#education" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Education</a>
+      <a href="#projects" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Projects</a>
+      <a href="#skills" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Skills</a>
+      <a href="#contact" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</a>
+    </div>
+    <button id="theme-toggle" class="p-2 rounded-md hover:bg-secondary transition-colors text-sm font-medium">
+      Toggle Theme
+    </button>
+  </div>
 </nav>
 
-<section id="home">
-  <div class="status-badge">
-    <div class="dot"></div>
-    Open to internships, junior engineering roles, and hands-on technical opportunities
+<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
+  <div class="reveal">
+    <div class="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-8 bg-secondary/50">
+      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+      <span class="text-minimal text-foreground">Open to internships & junior engineering roles</span>
+    </div>
   </div>
-  <h1 class="hero-name">Iova Alex</h1>
-  <p class="hero-sub" id="typewriter-text"></p>
-  <p style="color: var(--text-muted); margin-top: 10px;">📍 Bucharest, Romania</p>
-
-  <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download class="btn" style="margin-top: 30px;">Download CV</a>
+  
+  <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-architectural mb-6 reveal">
+    Iova Alex
+  </h1>
+  
+  <p class="text-lg md:text-xl text-muted-foreground max-w-2xl reveal-delayed mb-12">
+    Electrical & Telecommunications Engineering Student.<br>
+    Based in Bucharest, Romania. <span class="cite-hidden">[cite: 1, 2, 6, 62, 63, 67]</span>
+  </p>
+  
+  <div class="reveal-delayed">
+    <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download class="inline-flex h-12 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+      Download CV
+    </a>
+  </div>
 </section>
 
-<section id="about">
-  <h2>About Me</h2>
-  <div class="card tilt-card">
-    <p>Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, interested in networking, embedded systems, and digital circuits. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases. Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB. My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems.</p>
-    <p style="margin-top: 15px;"><strong>Languages:</strong> Romanian (native/fluent), English B2/C2.</p>
+<section id="about" class="py-24 px-6 border-t border-border">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-architectural mb-10">01 / About</h2>
+    <div class="bg-card border border-border rounded-lg p-8 md:p-12 shadow-sm">
+      <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+        Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, interested in networking, embedded systems, and digital circuits. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases. <span class="cite-hidden">[cite: 35, 36]</span>
+      </p>
+      <p class="text-lg text-muted-foreground leading-relaxed">
+        Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB. My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems. <span class="cite-hidden">[cite: 37, 38]</span>
+      </p>
+    </div>
   </div>
 </section>
 
-<section id="education">
-  <h2>Education</h2>
-  <div class="card tilt-card">
-    <div class="timeline-box">
-      <div class="timeline-item">
-        <span class="date-badge">2023 - Present</span>
-        <h3>Politehnica University of Bucharest</h3>
-        <p>Faculty of Electronics, Telecommunications and Information Technology.<br>
-        <strong>Degree:</strong> Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON).</p>
-        <p style="margin-top: 10px;"><em>Coursework:</em> Analog & Digital Integrated Circuits, Signals and Systems, Electronic Devices, Databases, Computer Programming [cite: 23-30, 84-92].</p>
+<section id="education" class="py-24 px-6 border-t border-border bg-secondary/30">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-architectural mb-10">02 / Education</h2>
+    
+    <div class="space-y-8">
+      <div class="flex flex-col md:flex-row gap-6 bg-card border border-border rounded-lg p-8 shadow-sm">
+        <div class="md:w-1/4">
+          <span class="text-minimal text-muted-foreground">2023 - Present</span>
+        </div>
+        <div class="md:w-3/4">
+          <h3 class="text-xl font-bold mb-2">Politehnica University of Bucharest</h3>
+          <p class="text-muted-foreground mb-4">Faculty of Electronics, Telecommunications and Information Technology. Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON). <span class="cite-hidden">[cite: 52, 53, 54, 55, 58, 59]</span></p>
+          <div class="flex flex-wrap gap-2 mt-4">
+            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Analog & Digital ICs</span>
+            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Signals and Systems</span>
+            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Databases</span>
+          </div>
+        </div>
       </div>
-      <div class="timeline-item" style="margin-bottom: 0;">
-        <span class="date-badge">2019 - 2023</span>
-        <h3>Gib Mihaescu National College</h3>
-        <p><strong>Specialization:</strong> Mathematics-Computer Science. Location: Dragasani.</p>
+
+      <div class="flex flex-col md:flex-row gap-6 bg-card border border-border rounded-lg p-8 shadow-sm">
+        <div class="md:w-1/4">
+          <span class="text-minimal text-muted-foreground">2019 - 2023</span>
+        </div>
+        <div class="md:w-3/4">
+          <h3 class="text-xl font-bold mb-2">Gib Mihaescu National College</h3>
+          <p class="text-muted-foreground">Mathematics-Computer Science specialization. Location: Dragasani. <span class="cite-hidden">[cite: 56, 57, 60, 61]</span></p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="projects">
-  <h2>Engineering Projects</h2>
-
-  <div class="card tilt-card">
-    <h3>Database Project - MySQL</h3>
-    <p>Developed a database-driven web application using MySQL, implementing backend logic cu Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML and CSS, ensuring interaction between frontend and backend components. Worked with Eclipse IDE for development, focusing on integrating database operations and managing application functionality.</p>
-
-    <div class="gallery">
-      <div class="img-box">
-        <img src="poze/users.png" alt="Users">
-        <div class="img-content"><p>Displays the list of all users. Performs add, edit, or delete operations.</p></div>
+<section id="projects" class="py-24 px-6 border-t border-border">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-architectural mb-10">03 / Engineering Projects</h2>
+    
+    <div class="grid grid-cols-1 gap-10">
+      
+      <div class="bg-card border border-border rounded-lg overflow-hidden shadow-sm">
+        <div class="p-8 md:p-10 border-b border-border">
+          <h3 class="text-2xl font-bold mb-4">Database Project - MySQL</h3>
+          <p class="text-muted-foreground leading-relaxed mb-6">
+            Developed a database-driven web application using MySQL, implementing backend logic with Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML and CSS. Worked with Eclipse IDE for development. <span class="cite-hidden">[cite: 40, 41, 42]</span>
+          </p>
+        </div>
+        <div class="p-6 bg-secondary/20 grid grid-cols-2 md:grid-cols-5 gap-4">
+          <img src="poze/users.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Users">
+          <img src="poze/os.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="OS">
+          <img src="poze/installations.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Installations">
+          <img src="poze/form.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Form">
+          <img src="poze/database.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Database">
+        </div>
       </div>
-      <div class="img-box">
-        <img src="poze/os.png" alt="OS">
-        <div class="img-content"><p>Presents all operating systems stored. Allows modifications and additions.</p></div>
-      </div>
-      <div class="img-box">
-        <img src="poze/installations.png" alt="Installations">
-        <div class="img-content"><p>Shows recorded installations: user, OS, date, and device.</p></div>
-      </div>
-      <div class="img-box">
-        <img src="poze/form.png" alt="Form">
-        <div class="img-content"><p>Installation form with dynamic dropdowns from the database.</p></div>
-      </div>
-    </div>
-  </div>
 
-  <div class="card tilt-card">
-    <h3>Laser Detection System with Auto Call</h3>
-    <p>Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection, alarm signaling, and power stability. Implemented the logic in Arduino IDE (C/C++), handling sensor input and GSM communication via AT commands.</p>
-  </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
+          <h3 class="text-xl font-bold mb-4">Laser Detection System</h3>
+          <p class="text-muted-foreground leading-relaxed">
+            Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection. Implemented the logic in Arduino IDE (C/C++). <span class="cite-hidden">[cite: 43, 44, 45, 46]</span>
+          </p>
+        </div>
 
-  <div class="card tilt-card">
-    <h3>Low-Frequency Voltage Amplifier</h3>
-    <p>Designed and simulated an amplifier using OrCAD. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress).</p>
-  </div>
-</section>
+        <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
+          <h3 class="text-xl font-bold mb-4">Low-Frequency Voltage Amplifier</h3>
+          <p class="text-muted-foreground leading-relaxed">
+            Designed and simulated an amplifier using OrCAD 17.2. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress). <span class="cite-hidden">[cite: 47, 48, 49, 50]</span>
+          </p>
+        </div>
+      </div>
 
-<section id="skills">
-  <h2>Tech Stack</h2>
-  <div class="card tilt-card" style="display: flex; justify-content: center;">
-    <div class="skills-container">
-      <span class="skill-tag">C/C++</span>
-      <span class="skill-tag">Java</span>
-      <span class="skill-tag">Python</span>
-      <span class="skill-tag">MySQL</span>
-      <span class="skill-tag">Hibernate ORM</span>
-      <span class="skill-tag">JSP & Servlets</span>
-      <span class="skill-tag">HTML & CSS</span>
-      <span class="skill-tag">MATLAB</span>
-      <span class="skill-tag">OrCAD</span>
-      <span class="skill-tag">Eclipse IDE</span>
-      <span class="skill-tag">Arduino IDE</span>
     </div>
   </div>
 </section>
 
-<section id="volunteering">
-  <h2>Volunteering</h2>
-  <div class="card tilt-card">
-    <div class="timeline-box">
-      <div class="timeline-item">
-        <h3>Volunteer - Electronics Students League (LSE)</h3>
-        <p>Active volunteer since the first year of university, contributing to the organization and coordination of major student and international events.</p>
-        <ul>
-          <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition with participants from over 30 countries.</li>
-          <li>Contributed to the organization of <strong>LAN Party</strong>, the largest student esports competition, helping manage event logistics and technical infrastructure.</li>
-          <li>Assisted in the setup and coordination of technical equipment, event spaces, and participant areas.</li>
-          <li>Collaborated with team members to handle on-site problem solving, participant support, and event management.</li>
-        </ul>
-      </div>
+<section id="skills" class="py-24 px-6 border-t border-border bg-secondary/30">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-architectural mb-10">04 / Tech Stack</h2>
+    
+    <div class="flex flex-wrap gap-3">
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">C/C++</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Java</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Python</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">MySQL</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Hibernate ORM</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">JSP & Servlets</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">HTML / CSS</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">MATLAB</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">OrCAD</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Arduino IDE</div>
     </div>
   </div>
 </section>
 
-<section id="contact">
-  <h2>Initialize Connection</h2>
-  <div class="card tilt-card" style="text-align: center;">
-    <p style="font-size: 20px; color: var(--text-main); margin-bottom: 10px;">📧 iovaalex1234@gmail.com</p>
-    <div style="display: flex; justify-content: center; gap: 20px;">
-      <a href="https://github.com/JustAlexD" target="_blank" class="btn">GitHub</a>
-      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="btn">LinkedIn</a>
+<section id="volunteering" class="py-24 px-6 border-t border-border">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="text-3xl font-bold text-architectural mb-10">05 / Volunteering</h2>
+    
+    <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
+      <h3 class="text-xl font-bold mb-2">Electronics Students League (LSE)</h3>
+      <p class="text-muted-foreground mb-6">Active volunteer since the first year of university. <span class="cite-hidden">[cite: 97, 98]</span></p>
+      
+      <ul class="space-y-4 text-muted-foreground list-disc pl-5">
+        <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition. <span class="cite-hidden">[cite: 99]</span></li>
+        <li>Contributed to the organization of <strong>LAN Party</strong>, managing event logistics and technical infrastructure. <span class="cite-hidden">[cite: 100]</span></li>
+        <li>Collaborated with team members to handle on-site problem solving, participant support, and event management. <span class="cite-hidden">[cite: 101, 102]</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<footer>
-  <p>© 2026 IOVA DUMITRU-ALEXANDRU | Engineered for the future</p>
+<section id="contact" class="py-32 px-6 border-t border-border bg-card text-center">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-4xl font-bold text-architectural mb-6">Let's build together.</h2>
+    <p class="text-lg text-muted-foreground mb-10">Currently open for new opportunities.</p>
+    
+    <div class="flex flex-col items-center gap-4 mb-12">
+      <a href="mailto:iovaalex1234@gmail.com" class="text-lg font-medium hover:text-muted-foreground transition-colors">iovaalex1234@gmail.com</a>
+    </div>
+
+    <div class="flex justify-center gap-6">
+      <a href="https://github.com/JustAlexD" target="_blank" class="inline-flex h-10 items-center justify-center rounded-md border border-border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none">GitHub</a>
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="inline-flex h-10 items-center justify-center rounded-md border border-border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer class="py-8 text-center border-t border-border text-sm text-muted-foreground">
+  © 2026 Iova Dumitru-Alexandru. Minimal Architecture Design.
 </footer>
 
-<div id="lightbox">
-  <img id="lightbox-img" src="" alt="Zoomed">
+<div id="lightbox" onclick="this.classList.remove('active'); setTimeout(() => this.style.display='none', 300)">
+  <img id="lightbox-img" src="" alt="Zoomed image">
 </div>
 
 <script>
-// --- CURSOR CUSTOM ---
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-window.addEventListener('mousemove', (e) => {
-  dot.style.left = e.clientX + 'px';
-  dot.style.top = e.clientY + 'px';
-  ring.animate({
-    left: `${e.clientX}px`,
-    top: `${e.clientY}px`
-  }, { duration: 200, fill: "forwards" });
-});
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('theme-toggle');
+  const htmlElement = document.documentElement;
 
-// --- TYPEWRITER EFFECT ---
-const text = "ELECTRICAL & TELECOMMUNICATIONS ENGINEERING STUDENT";
-const typeEl = document.getElementById('typewriter-text');
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    typeEl.innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 50);
-  }
-}
-setTimeout(typeWriter, 500);
-
-// --- SCROLL REVEAL ---
-const cards = document.querySelectorAll('.card');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
+  themeToggle.addEventListener('click', () => {
+    htmlElement.classList.toggle('dark');
   });
-}, { threshold: 0.1 });
-cards.forEach(card => observer.observe(card));
 
-// --- 3D TILT EFFECT ---
-const tiltCards = document.querySelectorAll('.tilt-card');
-tiltCards.forEach(card => {
-  card.addEventListener('mousemove', e => {
-    if(window.innerWidth < 768) return; 
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left; 
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8; 
-    const rotateY = ((x - centerX) / centerX) * 8;
-    
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-    card.style.transition = 'transform 0.1s ease-out';
+  // Lightbox Logic
+  const images = document.querySelectorAll('.gallery-img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  images.forEach(img => {
+    img.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lightbox.style.display = 'flex';
+      // Mici delay pentru a prinde tranzitia CSS de opacity
+      setTimeout(() => lightbox.classList.add('active'), 10);
+      lightboxImg.src = img.src;
+    });
   });
-  
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-    card.style.transition = 'transform 0.5s ease-out';
-  });
-});
-
-// --- LIGHTBOX ---
-const images = document.querySelectorAll('.gallery img');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-
-images.forEach(img => {
-  img.addEventListener('click', () => {
-    lightbox.style.display = 'flex';
-    setTimeout(() => lightbox.classList.add('active'), 10);
-    lightboxImg.src = img.src;
-  });
-});
-lightbox.addEventListener('click', () => {
-  lightbox.classList.remove('active');
-  setTimeout(() => lightbox.style.display = 'none', 300);
-});
-
-// --- CANVAS PARTICLES ---
-const canvas = document.getElementById('particle-canvas');
-const ctx = canvas.getContext('2d');
-let w, h, particles;
-
-function init() {
-  w = canvas.width = window.innerWidth;
-  h = canvas.height = window.innerHeight;
-  particles = [];
-  const particleCount = Math.floor((w * h) / 15000); 
-  for(let i=0; i<particleCount; i++) {
-    particles.push(new Particle());
-  }
-}
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * w;
-    this.y = Math.random() * h;
-    this.vx = (Math.random() - 0.5) * 1;
-    this.vy = (Math.random() - 0.5) * 1;
-    this.size = Math.random() * 2 + 1;
-  }
-  update() {
-    this.x += this.vx; this.y += this.vy;
-    if(this.x < 0 || this.x > w) this.vx *= -1;
-    if(this.y < 0 || this.y > h) this.vy *= -1;
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
-    ctx.fill();
-  }
-}
-
-let mouse = { x: null, y: null };
-window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
-window.addEventListener('resize', init);
-
-function animate() {
-  ctx.clearRect(0, 0, w, h);
-  
-  for(let i=0; i<particles.length; i++) {
-    particles[i].update();
-    particles[i].draw();
-    
-    for(let j=i; j<particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist < 100) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(0, 243, 255, ${0.2 - dist/500})`;
-        ctx.lineWidth = 0.5;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.stroke();
-      }
-    }
-    
-    if(mouse.x != null) {
-      const dx = particles[i].x - mouse.x;
-      const dy = particles[i].y - mouse.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      if(dist < 150) {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(189, 0, 255, ${0.5 - dist/300})`; 
-        ctx.lineWidth = 1;
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.stroke();
-      }
-    }
-  }
-  requestAnimationFrame(animate);
-}
-
-init();
-animate();
 </script>
 
 </body>
