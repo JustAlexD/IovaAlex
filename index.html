@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iova Alex | Portfolio</title>
+<title>Iova Alex | Minimalist Architecture Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -72,8 +72,6 @@
       --input: 0 0% 95%;
       --ring: 0 0% 0%;
       --radius: 0.5rem;
-      
-      --gradient-overlay: linear-gradient(180deg, hsl(0 0% 0% / 0.9), hsl(0 0% 0% / 0.1));
     }
 
     .dark {
@@ -119,11 +117,11 @@
       to { @apply opacity-100 translate-y-0; }
     }
 
-    /* Ascunde referințele obligatorii ale sistemului AI */
-    .cite-hidden { display: none !important; }
+    /* Ascunde eventualele referințe generate automat de sistemul meu */
+    .cite-hidden, [href^="#cite"] { display: none !important; }
   }
 
-  /* Imagine Lightbox Minimalist */
+  /* Lightbox Minimalist */
   #lightbox {
     display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
     justify-content: center; align-items: center; z-index: 50;
@@ -144,9 +142,10 @@
       <a href="#education" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Education</a>
       <a href="#projects" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Projects</a>
       <a href="#skills" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Skills</a>
+      <a href="#volunteering" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Volunteering</a>
       <a href="#contact" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Contact</a>
     </div>
-    <button id="theme-toggle" class="p-2 rounded-md hover:bg-secondary transition-colors text-sm font-medium">
+    <button id="theme-toggle" class="p-2 rounded-md hover:bg-secondary transition-colors text-sm font-medium border border-border">
       Toggle Theme
     </button>
   </div>
@@ -154,9 +153,9 @@
 
 <section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
   <div class="reveal">
-    <div class="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-8 bg-secondary/50">
-      <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-      <span class="text-minimal text-foreground">Open to internships & junior engineering roles</span>
+    <div class="inline-flex items-center gap-2 border border-border rounded-full px-5 py-2 mb-8 bg-secondary/50 shadow-sm">
+      <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+      <span class="text-xs font-semibold tracking-wide text-foreground">Open to internships, junior engineering roles & hands-on opportunities</span>
     </div>
   </div>
   
@@ -164,9 +163,11 @@
     Iova Alex
   </h1>
   
-  <p class="text-lg md:text-xl text-muted-foreground max-w-2xl reveal-delayed mb-12">
-    Electrical & Telecommunications Engineering Student.<br>
-    Based in Bucharest, Romania. <span class="cite-hidden">[cite: 1, 2, 6, 62, 63, 67]</span>
+  <p class="text-lg md:text-xl text-muted-foreground max-w-2xl reveal-delayed mb-2">
+    Electrical & Telecommunications Engineering Student
+  </p>
+  <p class="text-md text-muted-foreground reveal-delayed mb-12">
+    📍 Bucharest, Romania
   </p>
   
   <div class="reveal-delayed">
@@ -178,14 +179,19 @@
 
 <section id="about" class="py-24 px-6 border-t border-border">
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-3xl font-bold text-architectural mb-10">01 / About</h2>
+    <h2 class="text-3xl font-bold text-architectural mb-10">01 / About Me</h2>
     <div class="bg-card border border-border rounded-lg p-8 md:p-12 shadow-sm">
       <p class="text-lg text-muted-foreground leading-relaxed mb-6">
-        Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, interested in networking, embedded systems, and digital circuits. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases. <span class="cite-hidden">[cite: 35, 36]</span>
+        Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, interested in networking, embedded systems, and digital circuits. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases.
       </p>
-      <p class="text-lg text-muted-foreground leading-relaxed">
-        Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB. My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems. <span class="cite-hidden">[cite: 37, 38]</span>
+      <p class="text-lg text-muted-foreground leading-relaxed mb-6">
+        Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB. My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems.
       </p>
+      <div class="pt-6 border-t border-border">
+        <p class="text-md text-foreground font-medium">
+          Languages: <span class="text-muted-foreground font-normal">Romanian (native/fluent), English B2/C2.</span>
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -201,11 +207,16 @@
         </div>
         <div class="md:w-3/4">
           <h3 class="text-xl font-bold mb-2">Politehnica University of Bucharest</h3>
-          <p class="text-muted-foreground mb-4">Faculty of Electronics, Telecommunications and Information Technology. Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON). <span class="cite-hidden">[cite: 52, 53, 54, 55, 58, 59]</span></p>
-          <div class="flex flex-wrap gap-2 mt-4">
-            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Analog & Digital ICs</span>
-            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Signals and Systems</span>
-            <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Databases</span>
+          <p class="text-muted-foreground mb-4">Faculty of Electronics, Telecommunications and Information Technology.<br><strong>Degree:</strong> Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON).</p>
+          <div class="mt-4">
+            <p class="text-sm font-medium mb-2">Relevant Coursework:</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Analog & Digital ICs</span>
+              <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Signals and Systems</span>
+              <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Electronic Devices</span>
+              <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Databases</span>
+              <span class="px-3 py-1 bg-secondary text-xs rounded-md font-medium border border-border">Computer Programming</span>
+            </div>
           </div>
         </div>
       </div>
@@ -216,7 +227,7 @@
         </div>
         <div class="md:w-3/4">
           <h3 class="text-xl font-bold mb-2">Gib Mihaescu National College</h3>
-          <p class="text-muted-foreground">Mathematics-Computer Science specialization. Location: Dragasani. <span class="cite-hidden">[cite: 56, 57, 60, 61]</span></p>
+          <p class="text-muted-foreground"><strong>Specialization:</strong> Mathematics-Computer Science.<br>Location: Dragasani.</p>
         </div>
       </div>
     </div>
@@ -233,30 +244,41 @@
         <div class="p-8 md:p-10 border-b border-border">
           <h3 class="text-2xl font-bold mb-4">Database Project - MySQL</h3>
           <p class="text-muted-foreground leading-relaxed mb-6">
-            Developed a database-driven web application using MySQL, implementing backend logic with Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML and CSS. Worked with Eclipse IDE for development. <span class="cite-hidden">[cite: 40, 41, 42]</span>
+            Developed a database-driven web application using MySQL, implementing backend logic with Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML and CSS, ensuring interaction between frontend and backend components. Worked with Eclipse IDE for development, focusing on integrating database operations and managing application functionality.
           </p>
         </div>
-        <div class="p-6 bg-secondary/20 grid grid-cols-2 md:grid-cols-5 gap-4">
-          <img src="poze/users.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Users">
-          <img src="poze/os.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="OS">
-          <img src="poze/installations.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Installations">
-          <img src="poze/form.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Form">
-          <img src="poze/database.png" class="w-full h-auto rounded border border-border cursor-pointer hover:opacity-80 transition-opacity gallery-img" alt="Database">
+        <div class="p-6 bg-secondary/20 grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div class="relative group">
+            <img src="poze/users.png" class="w-full h-32 object-cover rounded border border-border cursor-pointer hover:opacity-75 transition-opacity gallery-img" alt="Users">
+            <p class="mt-2 text-xs text-muted-foreground">Displays list of all users. Performs add, edit, or delete operations.</p>
+          </div>
+          <div class="relative group">
+            <img src="poze/os.png" class="w-full h-32 object-cover rounded border border-border cursor-pointer hover:opacity-75 transition-opacity gallery-img" alt="OS">
+            <p class="mt-2 text-xs text-muted-foreground">Presents all operating systems stored. Allows modifications.</p>
+          </div>
+          <div class="relative group">
+            <img src="poze/installations.png" class="w-full h-32 object-cover rounded border border-border cursor-pointer hover:opacity-75 transition-opacity gallery-img" alt="Installations">
+            <p class="mt-2 text-xs text-muted-foreground">Shows recorded installations: user, OS, date, and device.</p>
+          </div>
+          <div class="relative group">
+            <img src="poze/form.png" class="w-full h-32 object-cover rounded border border-border cursor-pointer hover:opacity-75 transition-opacity gallery-img" alt="Form">
+            <p class="mt-2 text-xs text-muted-foreground">Installation form with dynamic dropdowns from the database.</p>
+          </div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
-          <h3 class="text-xl font-bold mb-4">Laser Detection System</h3>
+          <h3 class="text-xl font-bold mb-4">Laser Detection System with Auto Call</h3>
           <p class="text-muted-foreground leading-relaxed">
-            Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection. Implemented the logic in Arduino IDE (C/C++). <span class="cite-hidden">[cite: 43, 44, 45, 46]</span>
+            Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection, alarm signaling, and power stability. Implemented the logic in Arduino IDE (C/C++), handling sensor input and GSM communication via AT commands.
           </p>
         </div>
 
         <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
           <h3 class="text-xl font-bold mb-4">Low-Frequency Voltage Amplifier</h3>
           <p class="text-muted-foreground leading-relaxed">
-            Designed and simulated an amplifier using OrCAD 17.2. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress). <span class="cite-hidden">[cite: 47, 48, 49, 50]</span>
+            Designed and simulated an amplifier using OrCAD. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress).
           </p>
         </div>
       </div>
@@ -270,16 +292,17 @@
     <h2 class="text-3xl font-bold text-architectural mb-10">04 / Tech Stack</h2>
     
     <div class="flex flex-wrap gap-3">
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">C/C++</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Java</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Python</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">MySQL</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Hibernate ORM</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">JSP & Servlets</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">HTML / CSS</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">MATLAB</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">OrCAD</div>
-      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm">Arduino IDE</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">C/C++</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">Java</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">Python</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">MySQL</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">Hibernate ORM</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">JSP & Servlets</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">HTML & CSS</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">MATLAB</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">OrCAD</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">Eclipse IDE</div>
+      <div class="px-5 py-3 bg-card border border-border rounded-md font-medium shadow-sm hover:border-primary transition-colors">Arduino IDE</div>
     </div>
   </div>
 </section>
@@ -289,36 +312,37 @@
     <h2 class="text-3xl font-bold text-architectural mb-10">05 / Volunteering</h2>
     
     <div class="bg-card border border-border rounded-lg p-8 shadow-sm">
-      <h3 class="text-xl font-bold mb-2">Electronics Students League (LSE)</h3>
-      <p class="text-muted-foreground mb-6">Active volunteer since the first year of university. <span class="cite-hidden">[cite: 97, 98]</span></p>
+      <h3 class="text-xl font-bold mb-2">Volunteer - Electronics Students League (LSE)</h3>
+      <p class="text-muted-foreground mb-6">Active volunteer since the first year of university, contributing to the organization and coordination of major student and international events.</p>
       
       <ul class="space-y-4 text-muted-foreground list-disc pl-5">
-        <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition. <span class="cite-hidden">[cite: 99]</span></li>
-        <li>Contributed to the organization of <strong>LAN Party</strong>, managing event logistics and technical infrastructure. <span class="cite-hidden">[cite: 100]</span></li>
-        <li>Collaborated with team members to handle on-site problem solving, participant support, and event management. <span class="cite-hidden">[cite: 101, 102]</span></li>
+        <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition with participants from over 30 countries.</li>
+        <li>Contributed to the organization of <strong>LAN Party</strong>, the largest student esports competition, helping manage event logistics and technical infrastructure.</li>
+        <li>Assisted in the setup and coordination of technical equipment, event spaces, and participant areas.</li>
+        <li>Collaborated with team members to handle on-site problem solving, participant support, and event management.</li>
       </ul>
     </div>
   </div>
 </section>
 
-<section id="contact" class="py-32 px-6 border-t border-border bg-card text-center">
+<section id="contact" class="py-32 px-6 border-t border-border bg-secondary/30 text-center">
   <div class="max-w-2xl mx-auto">
-    <h2 class="text-4xl font-bold text-architectural mb-6">Let's build together.</h2>
-    <p class="text-lg text-muted-foreground mb-10">Currently open for new opportunities.</p>
+    <h2 class="text-4xl font-bold text-architectural mb-6">Initialize Connection.</h2>
+    <p class="text-lg text-muted-foreground mb-10">Looking forward to new technical challenges.</p>
     
     <div class="flex flex-col items-center gap-4 mb-12">
-      <a href="mailto:iovaalex1234@gmail.com" class="text-lg font-medium hover:text-muted-foreground transition-colors">iovaalex1234@gmail.com</a>
+      <a href="mailto:iovaalex1234@gmail.com" class="text-lg font-medium hover:text-muted-foreground transition-colors">📧 iovaalex1234@gmail.com</a>
     </div>
 
     <div class="flex justify-center gap-6">
-      <a href="https://github.com/JustAlexD" target="_blank" class="inline-flex h-10 items-center justify-center rounded-md border border-border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none">GitHub</a>
-      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="inline-flex h-10 items-center justify-center rounded-md border border-border bg-transparent px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none">LinkedIn</a>
+      <a href="https://github.com/JustAlexD" target="_blank" class="inline-flex h-12 items-center justify-center rounded-md border border-border bg-card px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">GitHub</a>
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="inline-flex h-12 items-center justify-center rounded-md border border-border bg-card px-8 text-sm font-medium shadow-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">LinkedIn</a>
     </div>
   </div>
 </section>
 
-<footer class="py-8 text-center border-t border-border text-sm text-muted-foreground">
-  © 2026 Iova Dumitru-Alexandru. Minimal Architecture Design.
+<footer class="py-8 text-center border-t border-border text-sm text-muted-foreground bg-background">
+  © 2026 IOVA DUMITRU-ALEXANDRU | Engineered for the future
 </footer>
 
 <div id="lightbox" onclick="this.classList.remove('active'); setTimeout(() => this.style.display='none', 300)">
@@ -343,7 +367,6 @@
     img.addEventListener('click', (e) => {
       e.stopPropagation();
       lightbox.style.display = 'flex';
-      // Mici delay pentru a prinde tranzitia CSS de opacity
       setTimeout(() => lightbox.classList.add('active'), 10);
       lightboxImg.src = img.src;
     });
