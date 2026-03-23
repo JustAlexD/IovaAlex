@@ -6,290 +6,287 @@
 <title>Iova Alex | Portfolio</title>
 
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
-
 body {
+  margin: 0;
+  font-family: Arial, sans-serif;
   background: #020617;
   color: #e2e8f0;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
-/* CURSOR */
-.cursor {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+/* glow background */
+body::before {
+  content: "";
   position: fixed;
+  width: 500px;
+  height: 500px;
   background: #38bdf8;
-  pointer-events: none;
-  z-index: 3000;
-  transform: translate(-50%, -50%);
+  filter: blur(200px);
+  top: -100px;
+  left: -100px;
+  opacity: 0.15;
+  z-index: -1;
 }
 
-.cursor-trail {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  position: fixed;
-  border: 2px solid #a78bfa;
-  pointer-events: none;
-  z-index: 2999;
-  transform: translate(-50%, -50%);
-  opacity: 0.5;
-}
-
-/* NAV */
+/* navbar */
 nav {
   position: fixed;
-  top: 0;
   width: 100%;
+  top: 0;
   padding: 15px;
-  backdrop-filter: blur(12px);
+  text-align: center;
+  backdrop-filter: blur(10px);
   background: rgba(2,6,23,0.7);
-  display: flex;
-  justify-content: center;
-  gap: 25px;
   z-index: 1000;
 }
 
 nav a {
+  margin: 0 15px;
   color: #38bdf8;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: bold;
 }
 
-/* HERO */
-#home {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
-}
-
-.hero-title {
-  font-size: 60px;
-  background: linear-gradient(90deg, #38bdf8, #a78bfa, #22d3ee);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.hero-bg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at center, rgba(56,189,248,0.2), transparent);
-  z-index: -1;
-}
-
-/* SECTIONS */
+/* sections */
 section {
   padding: 120px 20px;
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
 }
 
-/* CARDS */
+/* hero */
+#home {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* cards */
 .card {
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
-  padding: 25px;
-  margin-top: 30px;
-  transition: 0.3s;
-  cursor: pointer;
+  background: rgba(30,41,59,0.6);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  border: 1px solid rgba(56,189,248,0.2);
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.8s;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.01);
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* GALLERY */
+/* gallery */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 15px;
+  margin-top: 20px;
+}
+
+.img-box {
+  text-align: center;
 }
 
 .img-box img {
   width: 100%;
   border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-/* MODAL */
-.modal {
+.img-box img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(56,189,248,0.5);
+}
+
+.img-box p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #94a3b8;
+}
+
+/* skills */
+.skills span {
+  display: inline-block;
+  background: #38bdf8;
+  color: black;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* button */
+.btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #38bdf8;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* lightbox */
+#lightbox {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.9);
-  display: none;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
 }
 
-.modal-content {
-  background: #020617;
-  padding: 30px;
-  border-radius: 12px;
-  max-width: 600px;
-  border: 1px solid #38bdf8;
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
 }
 
-.close {
-  float: right;
-  cursor: pointer;
-  font-size: 20px;
-  color: #38bdf8;
-}
-
-/* LOADER */
-#loader {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: #020617;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 5000;
-}
-
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #38bdf8;
-  border-top: 4px solid transparent;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  100% { transform: rotate(360deg); }
+footer {
+  text-align: center;
+  padding: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="loader">
-  <div class="spinner"></div>
-</div>
-
-<div class="cursor"></div>
-<div class="cursor-trail"></div>
-
 <nav>
   <a href="#home">Home</a>
+  <a href="#about">About</a>
   <a href="#projects">Projects</a>
+  <a href="#skills">Skills</a>
+  <a href="#contact">Contact</a>
 </nav>
 
 <section id="home">
-  <div class="hero-bg"></div>
-  <h1 class="hero-title">Iova Alex</h1>
+  <h1>Iova Alex</h1>
   <p>Electronics & IT Student</p>
+  <p>📍 Bucharest</p>
+
+  <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download>
+    <button class="btn">Download CV</button>
+  </a>
+</section>
+
+<section id="about">
+  <h2>About</h2>
+  <div class="card">
+    Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, with a strong interest in continuous learning and personal development. I am a sociable and adaptable person, able to work effectively both independently and as part of a team. I have good communication skills, a proactive mindset, and a strong sense of responsibility. I enjoy solving problems, taking initiative, and contributing to projects in a structured and organized manner. I am motivated to grow professionally and take on new challenges in the field of technology.
+  </div>
 </section>
 
 <section id="projects">
-
   <h2>Projects</h2>
 
-  <div class="card" onclick="openModal('mysql')">
+  <div class="card">
     <h3>MySQL Web Application</h3>
-    <p>Click to view details</p>
+
+    <div class="gallery">
+
+      <div class="img-box">
+        <img src="poze/users.png">
+        <p>This page displays the list of all users stored in the database in a table format. The user can view available information and perform add, edit, or delete operations.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/os.png">
+        <p>The operating systems page allows displaying all OS entries stored in the database. Each record can be modified or deleted, and new systems can be added.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/installations.png">
+        <p>This page displays all recorded installations, including the user, operating system, installation date, and associated device. Data is presented in a table with full management options.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/form.png">
+        <p>The installation form allows selecting a user and an operating system from dynamic dropdown lists populated from the database. It also includes fields for installation date and device name.</p>
+      </div>
+
+      <div class="img-box">
+        <img src="poze/database.png">
+        <p>The user interface of the application is implemented using JSP and HTML, with the goal of providing a simple and intuitive user experience. The application layout is organized so that users can quickly access all available functionalities.</p>
+      </div>
+
+    </div>
   </div>
 
-  <div class="card" onclick="openModal('laser')">
+  <div class="card">
     <h3>Laser Detection System</h3>
-    <p>Click to view details</p>
+    <p>ESP32 + GSM SIM800L security system with automatic call alerts.</p>
   </div>
 
-  <div class="card" onclick="openModal('orcad')">
-    <h3>Low-Frequency Amplifier</h3>
-    <p>Click to view details</p>
+  <div class="card">
+    <h3>Low-Frequency Voltage Amplifier (OrCAD 17.2)</h3>
+    <p>Designed and simulated an amplifier using OrCAD.</p>
+    <p>Analyzed circuit behavior and verified performance through simulation.</p>
+    <p>Practical implementation of the amplifier in the laboratory (in progress).</p>
   </div>
 
 </section>
 
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">✖</span>
-    <div id="modal-body"></div>
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="card skills">
+    <span>Java</span>
+    <span>C/C++</span>
+    <span>Python</span>
+    <span>MySQL</span>
+    <span>Linux</span>
+    <span>MATLAB</span>
   </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="card">
+    <p><strong>Email:</strong> iovaalex1234@gmail.com</p>
+    <p><strong>GitHub:</strong> <a href="https://github.com/JustAlexD" target="_blank">github.com/JustAlexD</a></p>
+    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank">Profile</a></p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Iova Alex
+</footer>
+
+<div id="lightbox">
+  <img id="lightbox-img">
 </div>
 
 <script>
-// loader
-window.addEventListener("load", () => {
-  document.getElementById("loader").style.display = "none";
+const cards = document.querySelectorAll('.card');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
 });
 
-// cursor
-const cursor = document.querySelector(".cursor");
-const trail = document.querySelector(".cursor-trail");
+cards.forEach(card => observer.observe(card));
 
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
 
-  trail.style.left = e.clientX + "px";
-  trail.style.top = e.clientY + "px";
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+  });
 });
 
-// modal content
-function openModal(project) {
-  const modal = document.getElementById("modal");
-  const body = document.getElementById("modal-body");
-
-  let content = "";
-
-  if(project === "mysql") {
-    content = `
-      <h2>MySQL Web Application</h2>
-      <p>Full-stack Java application using JSP, Hibernate and MySQL.</p>
-      <p><b>Features:</b> CRUD operations, relational data, dynamic forms.</p>
-    `;
-  }
-
-  if(project === "laser") {
-    content = `
-      <h2>Laser Detection System</h2>
-      <p>ESP32 + GSM SIM800L system for security alerts.</p>
-    `;
-  }
-
-  if(project === "orcad") {
-    content = `
-      <h2>Low-Frequency Amplifier</h2>
-      <p>Designed and simulated using OrCAD 17.2.</p>
-      <p>Verified performance via simulation and lab implementation.</p>
-    `;
-  }
-
-  body.innerHTML = content;
-  modal.style.display = "flex";
-}
-
-function closeModal() {
-  document.getElementById("modal").style.display = "none";
-}
-
-// parallax hero
-document.addEventListener("mousemove", (e) => {
-  const hero = document.querySelector("#home");
-  let x = (window.innerWidth - e.pageX) / 50;
-  let y = (window.innerHeight - e.pageY) / 50;
-  hero.style.transform = `translate(${x}px, ${y}px)`;
+lightbox.addEventListener('click', () => {
+  lightbox.style.display = 'none';
 });
 </script>
 
