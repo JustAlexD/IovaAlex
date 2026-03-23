@@ -3,454 +3,274 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iova Alex | Portfolio</title>
+<title>Iova Alex | Interactive Tech Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
 
 <style>
+/* === VARIABILE & SETUP === */
 :root {
-  --bg: #05050a;
-  --text: #e2e8f0;
-  --card-bg: rgba(15, 15, 25, 0.6);
-  --card-border: rgba(0, 243, 255, 0.2);
-  --accent: #00f3ff;
-  --accent2: #bc13fe;
-  --accent3: #00ff66;
-  --nav-bg: rgba(5, 5, 10, 0.8);
-}
-
-body.light {
-  --bg: #f0f2f5;
-  --text: #0f172a;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --card-border: rgba(0, 162, 255, 0.3);
-  --accent: #0077ff;
-  --accent2: #8a2be2;
-  --accent3: #00b34a;
-  --nav-bg: rgba(240, 242, 245, 0.8);
+  --bg-color: #050508;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-bg: rgba(20, 20, 30, 0.3);
+  --card-border: rgba(0, 243, 255, 0.15);
+  --accent-cyan: #00f3ff;
+  --accent-purple: #bd00ff;
+  --accent-green: #00ff66;
+  --nav-bg: rgba(5, 5, 8, 0.8);
 }
 
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  cursor: none; 
 }
 
+html { scroll-behavior: smooth; }
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  transition: background 0.5s ease, color 0.5s ease;
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
   overflow-x: hidden;
 }
 
-/* Futuristic Animated Background */
-.bg-animation {
+/* === FUNDAL PARTICULE === */
+#particle-canvas {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   z-index: -2;
-  background: 
-    radial-gradient(circle at 15% 50%, rgba(0, 243, 255, 0.08), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(188, 19, 254, 0.08), transparent 25%);
-  animation: bgPulse 10s infinite alternate;
+  background: radial-gradient(circle at center, #0a0a12 0%, #000000 100%);
 }
 
-.grid-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: -1;
-  background-image: linear-gradient(var(--card-border) 1px, transparent 1px),
-  linear-gradient(90deg, var(--card-border) 1px, transparent 1px);
-  background-size: 50px 50px;
-  opacity: 0.15;
-  transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-  animation: gridMove 10s linear infinite;
+/* === CURSOR CUSTOM === */
+.cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px;
+  background-color: var(--accent-cyan);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+  box-shadow: 0 0 10px var(--accent-cyan);
 }
 
-@keyframes bgPulse {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(1.1); opacity: 1; }
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px;
+  border: 2px solid var(--accent-purple);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9998;
+  pointer-events: none;
+  transition: width 0.2s, height 0.2s;
 }
 
-@keyframes gridMove {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 50px; }
-}
-
+/* === NAVIGARE === */
 nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  position: fixed; width: 100%; top: 0;
+  padding: 20px 40px;
+  display: flex; justify-content: center; align-items: center; gap: 30px;
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   background: var(--nav-bg);
   z-index: 1000;
   border-bottom: 1px solid var(--card-border);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  gap: 20px;
-  flex-wrap: wrap;
 }
 
 nav a {
-  color: var(--text);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: 0.3s;
-  position: relative;
-}
-
-nav a::after {
-  content: '';
-  position: absolute;
-  width: 0; height: 2px;
-  bottom: -5px; left: 0;
-  background: var(--accent);
-  transition: width 0.3s ease;
-  box-shadow: 0 0 10px var(--accent);
-}
-
-nav a:hover::after {
-  width: 100%;
-}
-
-nav a:hover {
-  color: var(--accent);
-  text-shadow: 0 0 8px var(--accent);
-}
-
-#toggleTheme {
-  position: absolute;
-  right: 25px;
-  cursor: pointer;
-  background: linear-gradient(45deg, var(--accent), var(--accent2));
-  border: none;
-  padding: 8px 18px;
-  border-radius: 20px;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 1px;
-  box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
+  color: var(--text-main); text-decoration: none;
+  font-weight: 600; font-size: 13px; letter-spacing: 2px;
+  text-transform: uppercase; position: relative; padding: 5px 0;
   transition: 0.3s;
 }
 
-#toggleTheme:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px var(--accent);
+nav a::before {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0%; height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+  transition: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+nav a:hover::before { width: 100%; }
+nav a:hover { color: var(--accent-cyan); text-shadow: 0 0 10px var(--accent-cyan); }
+
+/* === STRUCTURĂ SECȚIUNI === */
 section {
-  padding: 140px 20px 60px;
+  padding: 140px 20px 80px;
   max-width: 1100px;
   margin: auto;
   position: relative;
 }
 
+/* === HERO SECTION === */
 #home {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 0 20px;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center; padding: 0 20px;
 }
 
 .hero-name {
-  font-size: 80px;
-  font-weight: 900;
-  background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+  font-size: clamp(60px, 10vw, 100px);
+  font-weight: 800;
+  background: linear-gradient(to right, var(--accent-cyan), #ffffff, var(--accent-purple));
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientText 4s linear infinite;
-  letter-spacing: 3px;
+  animation: shineText 5s linear infinite;
+  letter-spacing: 2px;
+  line-height: 1.1;
   margin-bottom: 10px;
-  filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3));
 }
 
-@keyframes gradientText {
-  0% { background-position: 0% center; }
-  100% { background-position: 200% center; }
-}
+@keyframes shineText { to { background-position: 200% center; } }
 
 .hero-sub {
-  font-size: 24px;
-  margin-top: 0;
-  font-weight: 300;
-  letter-spacing: 2px;
-  color: var(--accent);
-  text-transform: uppercase;
+  font-size: 18px; font-weight: 400; color: var(--text-muted);
+  letter-spacing: 3px; margin-bottom: 25px; min-height: 25px;
 }
 
-.hero-location {
-  margin-top: 15px;
-  font-size: 18px;
-  opacity: 0.8;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+/* STATUS BADGE PENTRU ANGAJARE */
+.status-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(0, 255, 102, 0.1);
+  border: 1px solid rgba(0, 255, 102, 0.3);
+  padding: 10px 20px; border-radius: 30px;
+  font-size: 14px; font-weight: 600; color: var(--accent-green);
+  letter-spacing: 1px; margin-bottom: 30px;
+  box-shadow: 0 0 20px rgba(0, 255, 102, 0.1);
+  animation: floatBadge 3s ease-in-out infinite;
+}
+
+.status-badge .dot {
+  width: 10px; height: 10px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent-green);
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 255, 102, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+}
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 .btn {
-  margin-top: 40px;
   padding: 15px 35px;
-  background: transparent;
-  color: var(--accent);
-  border: 2px solid var(--accent);
-  border-radius: 30px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 16px;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  transition: 0.4s ease;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+  background: transparent; color: var(--text-main);
+  border: 1px solid var(--accent-cyan); border-radius: 30px;
+  font-family: inherit; font-weight: 600; font-size: 14px;
+  letter-spacing: 2px; text-transform: uppercase;
+  position: relative; overflow: hidden; transition: 0.4s; z-index: 1;
+  text-decoration: none; display: inline-block;
 }
 
-.btn:hover {
-  background: var(--accent);
-  color: #000;
-  box-shadow: 0 0 30px var(--accent);
-  transform: translateY(-3px);
+.btn::before {
+  content: ''; position: absolute;
+  top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
+  transition: 0.5s; z-index: -1;
 }
 
+.btn:hover::before { left: 100%; }
+.btn:hover { background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px var(--accent-cyan); }
+
+/* === TITLURI SECȚIUNI === */
 h2 {
-  font-size: 36px;
-  margin-bottom: 40px;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--text);
-  position: relative;
+  font-size: 40px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 50px;
+  display: flex; align-items: center; gap: 15px;
 }
-
 h2::before {
-  content: '';
-  position: absolute;
-  width: 60px; height: 4px;
-  background: var(--accent2);
-  bottom: -10px; left: 50%;
-  transform: translateX(-50%);
-  border-radius: 2px;
-  box-shadow: 0 0 10px var(--accent2);
+  content: ''; display: block; width: 50px; height: 4px;
+  background: var(--accent-purple); box-shadow: 0 0 10px var(--accent-purple);
 }
 
-/* Card Styling & Glassmorphism */
+/* === CARDURI GLASSMORPHISM + 3D TILT === */
 .card {
   background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  padding: 30px;
-  border-radius: 20px;
-  margin-bottom: 30px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  padding: 40px; border-radius: 20px;
   border: 1px solid var(--card-border);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  margin-bottom: 30px; position: relative;
+  opacity: 0; transform: translateY(60px); transition: opacity 0.8s, transform 0.8s;
+  transform-style: preserve-3d;
 }
 
-.card::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.05) 10%, transparent 20%);
-  transform: rotate(45deg);
-  pointer-events: none;
-}
+.card.visible { opacity: 1; transform: translateY(0); }
 
-.card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+/* 3D Elements inside card */
+.card h3 { color: var(--accent-cyan); font-size: 24px; margin-bottom: 20px; transform: translateZ(40px); }
+.card p, .card ul { color: var(--text-muted); line-height: 1.8; font-size: 16px; transform: translateZ(20px); }
+.card ul { margin-left: 20px; margin-top: 10px; }
+.card strong { color: var(--text-main); }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
-  border-color: var(--accent);
-  box-shadow: 0 15px 40px rgba(0, 243, 255, 0.15);
-}
-
-.card h3 {
-  color: var(--accent);
-  margin-top: 0;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
-
-/* Timeline specific (Education & Volunteering) */
-.timeline-item {
-  border-left: 2px solid var(--accent);
-  padding-left: 20px;
-  margin-bottom: 20px;
-  position: relative;
-}
-
+/* TIMELINE (Edu & Vol) */
+.timeline-box { transform: translateZ(30px); }
+.timeline-item { border-left: 2px solid var(--accent-purple); padding-left: 25px; margin-bottom: 30px; position: relative; }
 .timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -7px;
-  top: 5px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: var(--accent2);
-  box-shadow: 0 0 10px var(--accent2);
+  content: ''; position: absolute; left: -8px; top: 5px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--accent-cyan); box-shadow: 0 0 15px var(--accent-cyan);
 }
-
 .date-badge {
-  display: inline-block;
-  background: rgba(188, 19, 254, 0.2);
-  color: var(--accent2);
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  border: 1px solid var(--accent2);
+  display: inline-block; background: rgba(189, 0, 255, 0.15); border: 1px solid rgba(189, 0, 255, 0.4);
+  color: #fff; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 600; margin-bottom: 12px;
 }
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-  margin-top: 30px;
-}
+/* GALERIE PROIECTE */
+.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px; transform: translateZ(25px); }
+.img-box { border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); position: relative; }
+.img-box img { width: 100%; display: block; transition: 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+.img-box:hover img { transform: scale(1.1); }
+.img-content { padding: 15px; background: rgba(5, 5, 10, 0.8); border-top: 1px solid rgba(255,255,255,0.05); }
+.img-content p { font-size: 13px; line-height: 1.5; color: #cbd5e1; }
 
-.img-box {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(0,0,0,0.2);
-  border: 1px solid var(--card-border);
-  transition: 0.4s;
-}
-
-.img-box:hover {
-  border-color: var(--accent3);
-  box-shadow: 0 0 20px rgba(0, 255, 102, 0.2);
-}
-
-.img-box img {
-  width: 100%;
-  display: block;
-  cursor: zoom-in;
-  transition: 0.5s;
-}
-
-.img-box:hover img {
-  transform: scale(1.08);
-  filter: brightness(1.2);
-}
-
-.img-content {
-  padding: 15px;
-}
-
-.img-content p {
-  font-size: 14px;
-  margin: 0;
-  color: #a0aec0;
-  line-height: 1.5;
-}
-
-.skills-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  justify-content: center;
-}
-
+/* SKILLS */
+.skills-container { display: flex; flex-wrap: wrap; gap: 15px; transform: translateZ(30px); }
 .skill-tag {
-  background: rgba(0, 243, 255, 0.1);
-  border: 1px solid var(--accent);
-  color: var(--text);
-  padding: 10px 20px;
-  border-radius: 25px;
-  font-weight: 600;
-  letter-spacing: 1px;
+  background: rgba(0, 243, 255, 0.05); border: 1px solid rgba(0, 243, 255, 0.3);
+  padding: 10px 20px; border-radius: 8px; font-size: 15px; font-weight: 600;
   transition: 0.3s;
-  cursor: default;
 }
-
 .skill-tag:hover {
-  background: var(--accent);
-  color: #000;
-  box-shadow: 0 0 15px var(--accent);
-  transform: translateY(-3px);
+  background: var(--accent-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 243, 255, 0.4); transform: translateY(-5px);
 }
 
+/* LIGHTBOX */
 #lightbox {
-  display: none;
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  z-index: 2000;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+  z-index: 2000; opacity: 0; transition: opacity 0.3s; backdrop-filter: blur(10px);
 }
+#lightbox.active { opacity: 1; }
+#lightbox img { max-width: 90%; max-height: 90%; border-radius: 12px; border: 1px solid var(--accent-purple); box-shadow: 0 0 40px rgba(189, 0, 255, 0.3); }
 
-#lightbox.active {
-  opacity: 1;
-}
+footer { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; border-top: 1px solid var(--card-border); }
 
-#lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 15px;
-  box-shadow: 0 0 40px rgba(0, 243, 255, 0.3);
-  border: 2px solid var(--accent);
-  transform: scale(0.9);
-  transition: 0.3s ease;
-}
-
-#lightbox.active img {
-  transform: scale(1);
-}
-
-footer {
-  text-align: center;
-  padding: 30px;
-  border-top: 1px solid var(--card-border);
-  margin-top: 50px;
-  background: rgba(0,0,0,0.3);
-  letter-spacing: 1px;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-
-/* Responsive Nav */
+/* MOBILE */
 @media (max-width: 768px) {
-  nav { padding: 15px; flex-direction: column; gap: 10px; }
-  #toggleTheme { position: static; margin-top: 10px; }
+  * { cursor: auto; } .cursor-dot, .cursor-ring { display: none; }
+  nav { padding: 15px; gap: 15px; justify-content: center; }
   .hero-name { font-size: 50px; }
-  section { padding-top: 180px; }
+  .card { transform: none !important; } 
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg-animation"></div>
-<div class="grid-overlay"></div>
+<canvas id="particle-canvas"></canvas>
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
 <nav>
   <a href="#home">Home</a>
@@ -460,172 +280,203 @@ footer {
   <a href="#skills">Skills</a>
   <a href="#volunteering">Volunteering</a>
   <a href="#contact">Contact</a>
-  <button id="toggleTheme">Switch Theme</button>
 </nav>
 
 <section id="home">
+  <div class="status-badge">
+    <div class="dot"></div>
+    Open to internships, junior engineering roles, and hands-on technical opportunities
+  </div>
   <h1 class="hero-name">Iova Alex</h1>
-  <p class="hero-sub">Electrical & Telecommunications Engineering Student</p>
-  <p class="hero-location">📍 Bucharest, Romania [cite: 6, 67]</p>
+  <p class="hero-sub" id="typewriter-text"></p>
+  <p style="color: var(--text-muted); margin-top: 10px;">📍 Bucharest, Romania</p>
 
-  <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download style="text-decoration: none;">
-    <button class="btn">Download Resume</button>
-  </a>
+  <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download class="btn" style="margin-top: 30px;">Download CV</a>
 </section>
 
 <section id="about">
   <h2>About Me</h2>
-  <div class="card">
-    <p>Third-year student at the Faculty of Electronics, Telecommunications and Information Technology [cite: 35], with a strong interest in networking, embedded systems, and digital circuits[cite: 35]. I am a sociable and adaptable person, able to work effectively both independently and as part of a team.</p>
-    <p>My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems[cite: 38]. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases[cite: 36]. Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB[cite: 37].</p>
-    <p><strong>Languages:</strong> Romanian (Native/Fluent), English B2/C2[cite: 32, 33, 94, 95].</p>
+  <div class="card tilt-card">
+    <p>Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, interested in networking, embedded systems, and digital circuits. I have knowledge of programming languages such as C/C++, Python, and Java, as well as experience working with MySQL databases. Additionally, I have experience using electronic design tools like OrCAD and computational tools such as MATLAB. My academic background covers both hardware and software aspects, including embedded systems and technologies related to electronics and information systems.</p>
+    <p style="margin-top: 15px;"><strong>Languages:</strong> Romanian (native/fluent), English B2/C2.</p>
   </div>
 </section>
 
 <section id="education">
   <h2>Education</h2>
-  <div class="card">
-    <div class="timeline-item">
-      <span class="date-badge">2023 - Present [cite: 58]</span>
-      <h3>Politehnica University of Bucharest [cite: 52]</h3>
-      <p>Faculty of Electronics, Telecommunications and Information Technology[cite: 53, 54].<br>
-      <strong>Degree:</strong> Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON)[cite: 55].</p>
-      <p><em>Relevant Coursework:</em> Analog & Digital Integrated Circuits, Signals and Systems, Electronic Devices, Databases, Computer Programming[cite: 24, 25, 26, 27, 28, 29].</p>
-    </div>
-    
-    <div class="timeline-item">
-      <span class="date-badge">2019 - 2023 [cite: 60]</span>
-      <h3>Gib Mihaescu National College, Dragasani [cite: 56, 61]</h3>
-      <p><strong>Specialization:</strong> Mathematics-Computer Science[cite: 57].</p>
+  <div class="card tilt-card">
+    <div class="timeline-box">
+      <div class="timeline-item">
+        <span class="date-badge">2023 - Present</span>
+        <h3>Politehnica University of Bucharest</h3>
+        <p>Faculty of Electronics, Telecommunications and Information Technology.<br>
+        <strong>Degree:</strong> Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON).</p>
+        <p style="margin-top: 10px;"><em>Coursework:</em> Analog & Digital Integrated Circuits, Signals and Systems, Electronic Devices, Databases, Computer Programming [cite: 23-30, 84-92].</p>
+      </div>
+      <div class="timeline-item" style="margin-bottom: 0;">
+        <span class="date-badge">2019 - 2023</span>
+        <h3>Gib Mihaescu National College</h3>
+        <p><strong>Specialization:</strong> Mathematics-Computer Science. Location: Dragasani.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="projects">
-  <h2>Featured Projects</h2>
+  <h2>Engineering Projects</h2>
 
-  <div class="card">
-    <h3>Database Project - MySQL [cite: 40]</h3>
-    <p>Developed a database-driven web application using MySQL, implementing backend logic with Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11[cite: 41]. Designed the UI using HTML and CSS[cite: 41]. Worked with Eclipse IDE for development[cite: 42].</p>
+  <div class="card tilt-card">
+    <h3>Database Project - MySQL</h3>
+    <p>Developed a database-driven web application using MySQL, implementing backend logic cu Java 21, Hibernate ORM, and JSP & Servlets (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML and CSS, ensuring interaction between frontend and backend components. Worked with Eclipse IDE for development, focusing on integrating database operations and managing application functionality.</p>
 
     <div class="gallery">
       <div class="img-box">
         <img src="poze/users.png" alt="Users">
-        <div class="img-content">
-          <p>This page displays the list of all users stored in the database in a table format. The user can view available information and perform add, edit, or delete operations on records.</p>
-        </div>
+        <div class="img-content"><p>Displays the list of all users. Performs add, edit, or delete operations.</p></div>
       </div>
-
       <div class="img-box">
         <img src="poze/os.png" alt="OS">
-        <div class="img-content">
-          <p>This page presents all operating systems stored in the database. Each entry can be modified or deleted, and the user can also add new systems.</p>
-        </div>
+        <div class="img-content"><p>Presents all operating systems stored. Allows modifications and additions.</p></div>
       </div>
-
       <div class="img-box">
         <img src="poze/installations.png" alt="Installations">
-        <div class="img-content">
-          <p>This page shows all recorded installations, including user, operating system, installation date, and associated device. The information is displayed in a structured table.</p>
-        </div>
+        <div class="img-content"><p>Shows recorded installations: user, OS, date, and device.</p></div>
       </div>
-
       <div class="img-box">
         <img src="poze/form.png" alt="Form">
-        <div class="img-content">
-          <p>The installation form allows selecting a user and an operating system from dynamically populated dropdown lists retrieved from the database. It also includes fields for the installation date and device name.</p>
-        </div>
-      </div>
-
-      <div class="img-box">
-        <img src="poze/database.png" alt="Database">
-        <div class="img-content">
-          <p>The user interface of the application is implemented using JSP and HTML, designed to provide a simple and intuitive user experience. The layout is structured for quick access to all functionalities.</p>
-        </div>
+        <div class="img-content"><p>Installation form with dynamic dropdowns from the database.</p></div>
       </div>
     </div>
   </div>
 
-  <div class="card">
-    <h3>Laser Detection System with Automatic Calling [cite: 43]</h3>
-    <p>Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts[cite: 44]. Used a laser, photodiode, buzzer, and capacitor for detection, alarm signaling, and power stability[cite: 45]. Implemented the logic in Arduino IDE (C/C++), handling sensor input and GSM communication via AT commands[cite: 46].</p>
+  <div class="card tilt-card">
+    <h3>Laser Detection System with Auto Call</h3>
+    <p>Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection, alarm signaling, and power stability. Implemented the logic in Arduino IDE (C/C++), handling sensor input and GSM communication via AT commands.</p>
   </div>
 
-  <div class="card">
-    <h3>Low-Frequency Voltage Amplifier (OrCAD 17.2) [cite: 47]</h3>
-    <p>Designed and simulated an amplifier using OrCAD[cite: 48]. Analyzed circuit behavior and verified performance through simulation[cite: 49]. Practical implementation of the amplifier in the laboratory is currently in progress[cite: 50].</p>
+  <div class="card tilt-card">
+    <h3>Low-Frequency Voltage Amplifier</h3>
+    <p>Designed and simulated an amplifier using OrCAD. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory (in progress).</p>
   </div>
 </section>
 
 <section id="skills">
-  <h2>Technical Skills</h2>
-  <div class="card">
+  <h2>Tech Stack</h2>
+  <div class="card tilt-card" style="display: flex; justify-content: center;">
     <div class="skills-container">
-      <span class="skill-tag">C/C++ [cite: 11]</span>
-      <span class="skill-tag">Java [cite: 11]</span>
-      <span class="skill-tag">Python [cite: 11]</span>
-      <span class="skill-tag">MySQL [cite: 16]</span>
-      <span class="skill-tag">Hibernate ORM [cite: 16]</span>
-      <span class="skill-tag">JSP & Servlets [cite: 13]</span>
-      <span class="skill-tag">HTML & CSS [cite: 13, 14]</span>
-      <span class="skill-tag">MATLAB [cite: 19]</span>
-      <span class="skill-tag">OrCAD [cite: 17]</span>
-      <span class="skill-tag">Eclipse IDE [cite: 21]</span>
-      <span class="skill-tag">Arduino IDE [cite: 21]</span>
-      <span class="skill-tag">Linux</span>
+      <span class="skill-tag">C/C++</span>
+      <span class="skill-tag">Java</span>
+      <span class="skill-tag">Python</span>
+      <span class="skill-tag">MySQL</span>
+      <span class="skill-tag">Hibernate ORM</span>
+      <span class="skill-tag">JSP & Servlets</span>
+      <span class="skill-tag">HTML & CSS</span>
+      <span class="skill-tag">MATLAB</span>
+      <span class="skill-tag">OrCAD</span>
+      <span class="skill-tag">Eclipse IDE</span>
+      <span class="skill-tag">Arduino IDE</span>
     </div>
   </div>
 </section>
 
 <section id="volunteering">
-  <h2>Volunteering Experience</h2>
-  <div class="card">
-    <div class="timeline-item">
-      <h3>Volunteer - Electronics Students League (LSE) [cite: 97]</h3>
-      <p>Active volunteer since the first year of university, contributing to the organization and coordination of major student and international events[cite: 98].</p>
-      <ul>
-        <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition with participants from over 30 countries, assisting with logistics, technical setup, and event operations[cite: 99].</li>
-        <li>Contributed to the organization of <strong>LAN Party</strong>, the largest student esports competition, helping manage event logistics, participant coordination, and technical infrastructure[cite: 100].</li>
-        <li>Assisted in the setup and coordination of technical equipment, event spaces, and participant areas, ensuring smooth event flow[cite: 101].</li>
-        <li>Collaborated with team members to handle on-site problem solving, participant support, and event management under dynamic conditions[cite: 102].</li>
-      </ul>
+  <h2>Volunteering</h2>
+  <div class="card tilt-card">
+    <div class="timeline-box">
+      <div class="timeline-item">
+        <h3>Volunteer - Electronics Students League (LSE)</h3>
+        <p>Active volunteer since the first year of university, contributing to the organization and coordination of major student and international events.</p>
+        <ul>
+          <li>Supported the planning and execution of <strong>RoboChallenge</strong>, an international robotics competition with participants from over 30 countries.</li>
+          <li>Contributed to the organization of <strong>LAN Party</strong>, the largest student esports competition, helping manage event logistics and technical infrastructure.</li>
+          <li>Assisted in the setup and coordination of technical equipment, event spaces, and participant areas.</li>
+          <li>Collaborated with team members to handle on-site problem solving, participant support, and event management.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <h2>Initiate Contact</h2>
-  <div class="card" style="text-align: center;">
-    <p style="font-size: 20px;">📧 iovaalex1234@gmail.com [cite: 5, 66]</p>
-    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
-      <a href="https://github.com/JustAlexD" target="_blank" class="btn">GitHub [cite: 8, 69]</a>
-      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="btn">LinkedIn [cite: 7, 68]</a>
+  <h2>Initialize Connection</h2>
+  <div class="card tilt-card" style="text-align: center;">
+    <p style="font-size: 20px; color: var(--text-main); margin-bottom: 10px;">📧 iovaalex1234@gmail.com</p>
+    <div style="display: flex; justify-content: center; gap: 20px;">
+      <a href="https://github.com/JustAlexD" target="_blank" class="btn">GitHub</a>
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="btn">LinkedIn</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Iova Alex [cite: 1, 62] | Built with futuristic vibes</p>
+  <p>© 2026 IOVA DUMITRU-ALEXANDRU | Engineered for the future</p>
 </footer>
 
 <div id="lightbox">
-  <img id="lightbox-img" src="" alt="Zoomed Project Image">
+  <img id="lightbox-img" src="" alt="Zoomed">
 </div>
 
 <script>
-// Scroll Animation Observer
+// --- CURSOR CUSTOM ---
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+window.addEventListener('mousemove', (e) => {
+  dot.style.left = e.clientX + 'px';
+  dot.style.top = e.clientY + 'px';
+  ring.animate({
+    left: `${e.clientX}px`,
+    top: `${e.clientY}px`
+  }, { duration: 200, fill: "forwards" });
+});
+
+// --- TYPEWRITER EFFECT ---
+const text = "ELECTRICAL & TELECOMMUNICATIONS ENGINEERING STUDENT";
+const typeEl = document.getElementById('typewriter-text');
+let i = 0;
+function typeWriter() {
+  if (i < text.length) {
+    typeEl.innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeWriter, 50);
+  }
+}
+setTimeout(typeWriter, 500);
+
+// --- SCROLL REVEAL ---
 const cards = document.querySelectorAll('.card');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.classList.add('show');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) {
+      entry.target.classList.add('visible');
     }
   });
 }, { threshold: 0.1 });
+cards.forEach(card => observer.observe(card));
 
-cards.forEach(c => observer.observe(c));
+// --- 3D TILT EFFECT ---
+const tiltCards = document.querySelectorAll('.tilt-card');
+tiltCards.forEach(card => {
+  card.addEventListener('mousemove', e => {
+    if(window.innerWidth < 768) return; 
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left; 
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8; 
+    const rotateY = ((x - centerX) / centerX) * 8;
+    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    card.style.transition = 'transform 0.1s ease-out';
+  });
+  
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    card.style.transition = 'transform 0.5s ease-out';
+  });
+});
 
-// Lightbox Logic
+// --- LIGHTBOX ---
 const images = document.querySelectorAll('.gallery img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
@@ -637,22 +488,92 @@ images.forEach(img => {
     lightboxImg.src = img.src;
   });
 });
-
 lightbox.addEventListener('click', () => {
   lightbox.classList.remove('active');
   setTimeout(() => lightbox.style.display = 'none', 300);
 });
 
-// Theme Toggle
-const toggleBtn = document.getElementById('toggleTheme');
-toggleBtn.addEventListener('click', () => {
-  document.body.classList.toggle('light');
-  if(document.body.classList.contains('light')) {
-    toggleBtn.textContent = 'Dark Mode';
-  } else {
-    toggleBtn.textContent = 'Light Mode';
+// --- CANVAS PARTICLES ---
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let w, h, particles;
+
+function init() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+  particles = [];
+  const particleCount = Math.floor((w * h) / 15000); 
+  for(let i=0; i<particleCount; i++) {
+    particles.push(new Particle());
   }
-});
+}
+
+class Particle {
+  constructor() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.vx = (Math.random() - 0.5) * 1;
+    this.vy = (Math.random() - 0.5) * 1;
+    this.size = Math.random() * 2 + 1;
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy;
+    if(this.x < 0 || this.x > w) this.vx *= -1;
+    if(this.y < 0 || this.y > h) this.vy *= -1;
+  }
+  draw() {
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0, 243, 255, 0.5)';
+    ctx.fill();
+  }
+}
+
+let mouse = { x: null, y: null };
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('mouseout', () => { mouse.x = null; mouse.y = null; });
+window.addEventListener('resize', init);
+
+function animate() {
+  ctx.clearRect(0, 0, w, h);
+  
+  for(let i=0; i<particles.length; i++) {
+    particles[i].update();
+    particles[i].draw();
+    
+    for(let j=i; j<particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 100) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(0, 243, 255, ${0.2 - dist/500})`;
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+    
+    if(mouse.x != null) {
+      const dx = particles[i].x - mouse.x;
+      const dy = particles[i].y - mouse.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 150) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(189, 0, 255, ${0.5 - dist/300})`; 
+        ctx.lineWidth = 1;
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(mouse.x, mouse.y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+init();
+animate();
 </script>
 
 </body>
