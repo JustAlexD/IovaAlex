@@ -13,7 +13,7 @@ body {
   color: #e2e8f0;
 }
 
-/* background glow */
+/* glow background */
 body::before {
   content: "";
   position: fixed;
@@ -46,14 +46,10 @@ nav a {
   font-weight: bold;
 }
 
-nav a:hover {
-  color: #22c55e;
-}
-
 /* sections */
 section {
   padding: 120px 20px;
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
 }
 
@@ -64,19 +60,6 @@ section {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-}
-
-#home h1 {
-  font-size: 60px;
-  background: linear-gradient(90deg, #38bdf8, #22c55e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.location {
-  margin-top: 10px;
-  color: #38bdf8;
 }
 
 /* cards */
@@ -85,17 +68,46 @@ section {
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 12px;
-  margin-top: 15px;
+  margin-top: 20px;
   border: 1px solid rgba(56,189,248,0.2);
-
   opacity: 0;
   transform: translateY(40px);
-  transition: 0.8s ease;
+  transition: 0.8s;
 }
 
 .card.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.img-box {
+  text-align: center;
+}
+
+.img-box img {
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.img-box img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(56,189,248,0.5);
+}
+
+.img-box p {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #94a3b8;
 }
 
 /* skills */
@@ -116,28 +128,29 @@ section {
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.btn:hover {
-  background: #0ea5e9;
-  transform: scale(1.05);
+/* lightbox */
+#lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
 }
 
-/* links */
-a {
-  color: #38bdf8;
+#lightbox img {
+  max-width: 90%;
+  max-height: 90%;
 }
 
-a:hover {
-  text-decoration: underline;
-}
-
-/* footer */
 footer {
   text-align: center;
   padding: 20px;
-  color: #64748b;
 }
 </style>
 </head>
@@ -152,43 +165,68 @@ footer {
   <a href="#contact">Contact</a>
 </nav>
 
-<!-- HOME -->
 <section id="home">
   <h1>Iova Alex</h1>
   <p>Electronics & IT Student</p>
-  <div class="location">📍 Bucharest, Romania</div>
+  <p>📍 Bucharest</p>
 
   <a href="IOVA_DUMITRU_ALEXANDRU_CV.pdf" download>
     <button class="btn">Download CV</button>
   </a>
 </section>
 
-<!-- ABOUT -->
 <section id="about">
-  <h2>About Me</h2>
+  <h2>About</h2>
   <div class="card">
-    Third-year student at the Faculty of Electronics, Telecommunications and Information Technology,
-    passionate about embedded systems, electronics, and software development.
-    I enjoy building practical projects and learning new technologies.
+    Third-year student passionate about electronics, embedded systems and software development.
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <h2>Projects</h2>
 
   <div class="card">
     <h3>MySQL Web Application</h3>
-    <p>Java 21 + Hibernate ORM + JSP/Servlets CRUD application deployed on Apache Tomcat.</p>
+    <p>
+      Web application for managing users, operating systems and installations.
+      Built using Java 21, Hibernate ORM, JSP/Servlets and MySQL with full CRUD operations.
+    </p>
+
+    <div class="gallery">
+      <div class="img-box">
+        <img src="https://raw.githubusercontent.com/JustAlexD/poze/main/users.png">
+        <p>Users management interface</p>
+      </div>
+
+      <div class="img-box">
+        <img src="https://raw.githubusercontent.com/JustAlexD/poze/main/os.png">
+        <p>Operating systems list</p>
+      </div>
+
+      <div class="img-box">
+        <img src="https://raw.githubusercontent.com/JustAlexD/poze/main/installations.png">
+        <p>Installations overview</p>
+      </div>
+
+      <div class="img-box">
+        <img src="https://raw.githubusercontent.com/JustAlexD/poze/main/form.png">
+        <p>Add new installation form</p>
+      </div>
+
+      <div class="img-box">
+        <img src="https://raw.githubusercontent.com/JustAlexD/poze/main/database.png">
+        <p>Database structure</p>
+      </div>
+    </div>
   </div>
 
   <div class="card">
     <h3>Laser Detection System</h3>
-    <p>ESP32-based security system using GSM SIM800L for automatic calling alerts.</p>
+    <p>ESP32 + GSM SIM800L security system with automatic call alerts.</p>
   </div>
+
 </section>
 
-<!-- SKILLS -->
 <section id="skills">
   <h2>Skills</h2>
   <div class="card skills">
@@ -196,34 +234,17 @@ footer {
     <span>C/C++</span>
     <span>Python</span>
     <span>MySQL</span>
-    <span>Hibernate</span>
     <span>Linux</span>
-    <span>SystemVerilog</span>
     <span>MATLAB</span>
-    <span>OrCAD</span>
-    <span>Embedded Systems</span>
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <h2>Contact</h2>
   <div class="card">
     <p>📧 iovaalex1234@gmail.com</p>
-
-    <p>
-      💼 GitHub: 
-      <a href="https://github.com/JustAlexD" target="_blank">
-        JustAlexD
-      </a>
-    </p>
-
-    <p>
-      🔗 LinkedIn: 
-      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/?skipRedirect=true" target="_blank">
-        Profile
-      </a>
-    </p>
+    <p><a href="https://github.com/JustAlexD" target="_blank">GitHub</a></p>
+    <p><a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank">LinkedIn</a></p>
   </div>
 </section>
 
@@ -231,8 +252,11 @@ footer {
   © 2026 Iova Alex
 </footer>
 
+<div id="lightbox">
+  <img id="lightbox-img">
+</div>
+
 <script>
-// scroll animation
 const cards = document.querySelectorAll('.card');
 
 const observer = new IntersectionObserver(entries => {
@@ -244,6 +268,21 @@ const observer = new IntersectionObserver(entries => {
 });
 
 cards.forEach(card => observer.observe(card));
+
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    lightbox.style.display = 'flex';
+    lightboxImg.src = img.src;
+  });
+});
+
+lightbox.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
 </script>
 
 </body>
