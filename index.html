@@ -293,48 +293,49 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
       
       <div class="lg:col-span-7 bg-card border border-border rounded-2xl p-8 md:p-10 shadow-sm scroll-reveal delay-100 flex flex-col justify-center">
-        <p class="text-lg text-muted-foreground leading-relaxed mb-6">
-          Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, with a profound interest in bridging the gap between low-level hardware design and high-level software architecture. 
+        <div class="inline-flex items-center gap-2 px-3 py-1 mb-6 border border-border rounded-full w-fit bg-secondary/50">
+          <span class="w-2 h-2 rounded-full bg-foreground"></span>
+          <span class="text-xs font-bold uppercase tracking-widest text-foreground">3rd Year</span>
+        </div>
+        <p class="text-2xl md:text-3xl text-foreground leading-snug font-light mb-6">
+          Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, with a profound interest in bridging the gap between low-level hardware design and high-level software architecture.
         </p>
-        <p class="text-lg text-muted-foreground leading-relaxed mb-6">
-          I have strong knowledge of programming languages such as <strong class="text-foreground">C/C++, Python, and Java</strong>, along with practical experience in building robust <strong class="text-foreground">MySQL</strong> databases. My academic background covers the complete spectrum of embedded systems and electronics.
-        </p>
-        <div class="pt-6 border-t border-border mt-auto">
-          <p class="text-sm text-foreground font-semibold uppercase tracking-wider mb-1">Languages</p>
-          <p class="text-muted-foreground">Romanian (Native/Fluent) • English (B2/C2)</p>
+        <div class="pt-6 border-t border-border mt-auto flex items-center gap-3">
+          <span class="text-xs text-foreground font-semibold uppercase tracking-wider bg-secondary px-2 py-1 rounded">Languages</span>
+          <p class="text-sm text-muted-foreground">Romanian (Native/Fluent) • English (B2/C2)</p>
         </div>
       </div>
 
-      <div class="lg:col-span-5 flex flex-col gap-6">
+      <div class="lg:col-span-5 flex flex-col gap-5">
         
-        <div class="bg-gradient-to-br from-card to-background border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-200 relative overflow-hidden group h-full">
+        <div class="bg-gradient-to-br from-card to-background border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-200 relative overflow-hidden group h-full">
           <div class="absolute inset-0 bg-foreground/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded-md">Hardware Engineering</span>
-          </div>
-          <h3 class="text-xl font-bold text-foreground mb-3">Simulation & PCB Design</h3>
+          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+            Hardware & Simulation
+          </h3>
           <p class="text-muted-foreground text-sm leading-relaxed">
-            Proficient in advanced circuit design, schematic capture, and PCB layout utilizing <strong class="text-foreground">OrCAD</strong>. Strong analytical background in <strong class="text-foreground">MATLAB</strong> for complex system simulation, signal processing, and low-frequency voltage analysis.
+            Proficient in electronics and design utilizing tools like <strong class="text-foreground">OrCAD</strong>. Experienced in computational system simulation and advanced analysis using <strong class="text-foreground">MATLAB</strong>.
           </p>
         </div>
 
-        <div class="bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-300 relative h-full">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1 bg-secondary text-foreground border border-border text-[10px] font-bold uppercase tracking-widest rounded-md">Embedded</span>
-          </div>
-          <h3 class="text-xl font-bold text-foreground mb-3">Microcontrollers</h3>
+        <div class="bg-card border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-300 relative h-full">
+          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+            Embedded Systems
+          </h3>
           <p class="text-muted-foreground text-sm leading-relaxed">
-            Hands-on experience with hardware integration and IoT protocols using <strong class="text-foreground">ESP32</strong> and <strong class="text-foreground">Arduino IDE</strong>. Expertise in sensor interfacing and GSM communications (AT commands).
+            Developing robust microcontroller logic programming in <strong class="text-foreground">C/C++</strong>. Extensive experience working with electronics through the <strong class="text-foreground">Arduino IDE</strong>.
           </p>
         </div>
 
-        <div class="bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-400 relative h-full">
-          <div class="flex items-center gap-3 mb-4">
-            <span class="px-3 py-1 bg-secondary text-foreground border border-border text-[10px] font-bold uppercase tracking-widest rounded-md">Software Engineering</span>
-          </div>
-          <h3 class="text-xl font-bold text-foreground mb-3">Backend & Databases</h3>
+        <div class="bg-card border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-400 relative h-full">
+          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+            Software & Web Dev
+          </h3>
           <p class="text-muted-foreground text-sm leading-relaxed">
-            Architecting database-driven applications using <strong class="text-foreground">Java, Hibernate ORM, and Jakarta EE (JSP/Servlets)</strong>. Proficient in relational database management with <strong class="text-foreground">MySQL</strong> and structuring reliable backend logic.
+            Programming in <strong class="text-foreground">Java</strong> and <strong class="text-foreground">Python</strong>. Architecting full web development with <strong class="text-foreground">JSP, Servlets (Jakarta EE), HTML, CSS</strong>. Building solid backend and databases using <strong class="text-foreground">MySQL</strong> and <strong class="text-foreground">Hibernate ORM</strong> within <strong class="text-foreground">Eclipse IDE</strong>.
           </p>
         </div>
 
@@ -564,7 +565,7 @@
 </section>
 
 <footer class="py-10 text-center border-t border-border text-sm font-medium text-muted-foreground bg-background">
-  <p>© 2026 IOVA DUMITRU-ALEXANDRU</p>
+  <p>© 2026 Iova Alex</p>
   <p class="mt-2 text-xs opacity-60">Engineered for the future.</p>
 </footer>
 
