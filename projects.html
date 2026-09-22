@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Selected software and engineering projects by Iova Alex.">
+  <meta name="theme-color" content="#090b10">
+  <title>Projects | Iova Alex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="shell nav-wrap">
+    <a class="brand" href="index.html" aria-label="Iova Alex home">
+      <span class="brand-mark">IA</span>
+      <span>Iova Alex</span>
+    </a>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="index.html" class="">Home</a>
+      <a href="about.html" class="">About</a>
+      <a href="experience.html" class="">Experience</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="skills.html" class="">Skills</a>
+      <a href="contact.html" class="">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+      <button class="icon-btn menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="">Home</a>
+    <a href="about.html" class="">About</a>
+    <a href="experience.html" class="">Experience</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="skills.html" class="">Skills</a>
+    <a href="contact.html" class="">Contact</a>
+  </nav>
+</header>
+<main class="page-main">
+  <section class="page-hero shell reveal">
+    <span class="section-no">03 / Projects</span>
+    <h1>Selected software &<br><span>engineering work.</span></h1>
+    <p>Projects from MakeITFuture practice and university coursework, covering automation, full-stack development, databases and embedded systems.</p>
+  </section>
+
+  <section class="shell project-list">
+    <article class="project-card featured reveal">
+      <div class="project-index">01</div>
+      <div class="project-body">
+        <span class="mini-label">MakeITFuture Practice</span>
+        <h2>Recann · Lead Generation & Outreach Automation</h2>
+        <p>Built and refined a lead-generation workflow using Apify for LinkedIn/company data, Supabase for campaign, company and contact data, Apollo.io for enrichment and Unipile for email/LinkedIn outreach. Worked with a Next.js/Vercel dashboard and cloud-hosted AI services.</p>
+        <div class="tag-row"><span>Next.js</span><span>Supabase</span><span>Apify</span><span>Apollo.io</span><span>Unipile</span><span>Vercel</span></div>
+      </div>
+    </article>
+
+    <article class="project-card reveal">
+      <div class="project-index">02</div>
+      <div class="project-body">
+        <span class="mini-label">MakeITFuture Practice</span>
+        <h2>Forms for Make · Bubble Migration</h2>
+        <p>Migrated Bubble-based functionality to a Next.js + Supabase/Vercel architecture. Worked on database structure, authentication, Row Level Security, rate limiting, Edge Function account creation, integration flows and security fixes.</p>
+        <div class="tag-row"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>RLS</span><span>Edge Functions</span></div>
+      </div>
+    </article>
+
+    <article class="project-card reveal">
+      <div class="project-index">03</div>
+      <div class="project-body">
+        <span class="mini-label">MakeITFuture Practice</span>
+        <h2>UNIC GLOBAL CAR · Web Platform</h2>
+        <p>Migrated a Vite/React/TypeScript/Tailwind project into a GitHub, Vercel and Supabase workflow, configured deployment and worked on a content-heavy blog with approximately 200 articles.</p>
+        <div class="tag-row"><span>Vite</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Supabase</span></div>
+      </div>
+    </article>
+
+    <article class="project-card visual-project reveal">
+      <div class="project-copy">
+        <span class="mini-label">Academic Project · 2026</span>
+        <h2>Database-Driven Web Application</h2>
+        <p>Developed a MySQL-backed web application with Java 21, Hibernate ORM, JSP and Servlets (Jakarta EE), deployed on Apache Tomcat 11. Built the interface with HTML, CSS and JavaScript and connected frontend interactions to database operations.</p>
+        <div class="tag-row"><span>Java 21</span><span>MySQL</span><span>Hibernate</span><span>Jakarta EE</span><span>Tomcat</span></div>
+      </div>
+      <div class="project-gallery">
+        <button class="gallery-shot" data-lightbox="poze/users.png"><img src="poze/users.png" alt="Users table interface"></button>
+        <button class="gallery-shot" data-lightbox="poze/form.png"><img src="poze/form.png" alt="Dynamic form interface"></button>
+        <button class="gallery-shot" data-lightbox="poze/database.png"><img src="poze/database.png" alt="Database web application interface"></button>
+      </div>
+    </article>
+
+    <article class="project-card reveal">
+      <div class="project-index">05</div>
+      <div class="project-body">
+        <span class="mini-label">Academic Project</span>
+        <h2>Laser Detection System with Automatic Calling</h2>
+        <p>Built an ESP32 + SIM800L security prototype in C/C++, handling sensor input, alarm logic and GSM communication via AT commands.</p>
+        <div class="tag-row"><span>ESP32</span><span>SIM800L</span><span>C/C++</span><span>Arduino IDE</span><span>AT Commands</span></div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<div class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close image">×</button>
+  <img src="" alt="Project screenshot enlarged">
+</div>
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <strong>Iova Alex</strong>
+      <p>Fourth-year ETTI student building software, automation and embedded systems.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:iovaalex1234@gmail.com">Email</a>
+      <a href="https://github.com/JustAlexD" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" rel="noreferrer">LinkedIn</a>
+    </div>
+  </div>
+  <div class="shell footer-bottom">© <span data-year></span> Iova Alex. Built for the web.</div>
+</footer>
+</body>
+</html>

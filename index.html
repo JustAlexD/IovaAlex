@@ -1,646 +1,114 @@
 <!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Iova Alex | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-
-<script>
-  tailwind.config = {
-    darkMode: 'class',
-    theme: {
-      extend: {
-        fontFamily: { sans: ['Inter', 'sans-serif'] },
-        colors: {
-          border: "hsl(var(--border))",
-          input: "hsl(var(--input))",
-          ring: "hsl(var(--ring))",
-          background: "hsl(var(--background))",
-          foreground: "hsl(var(--foreground))",
-          primary: {
-            DEFAULT: "hsl(var(--primary))",
-            foreground: "hsl(var(--primary-foreground))",
-          },
-          secondary: {
-            DEFAULT: "hsl(var(--secondary))",
-            foreground: "hsl(var(--secondary-foreground))",
-          },
-          muted: {
-            DEFAULT: "hsl(var(--muted))",
-            foreground: "hsl(var(--muted-foreground))",
-          },
-          accent: {
-            DEFAULT: "hsl(var(--accent))",
-            foreground: "hsl(var(--accent-foreground))",
-          },
-          card: {
-            DEFAULT: "hsl(var(--card))",
-            foreground: "hsl(var(--card-foreground))",
-          },
-        },
-        borderRadius: {
-          lg: "var(--radius)",
-          md: "calc(var(--radius) - 2px)",
-          sm: "calc(var(--radius) - 4px)",
-        },
-        transitionTimingFunction: {
-          'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
-        }
-      }
-    }
-  }
-</script>
-
-<style type="text/tailwindcss">
-  @layer base {
-    :root {
-      /* Pure Architecture Palette - Light Mode */
-      --background: 0 0% 100%;
-      --foreground: 0 0% 0%;
-      --card: 0 0% 100%;
-      --card-foreground: 0 0% 0%;
-      --primary: 0 0% 0%;
-      --primary-foreground: 0 0% 100%;
-      --secondary: 0 0% 96%;
-      --secondary-foreground: 0 0% 0%;
-      --muted: 0 0% 96%;
-      --muted-foreground: 0 0% 40%;
-      --border: 0 0% 90%;
-      --radius: 0.5rem;
-    }
-
-    .dark {
-      /* Pure Architecture Palette - Dark Mode */
-      --background: 0 0% 5%;
-      --foreground: 0 0% 100%;
-      --card: 0 0% 8%;
-      --card-foreground: 0 0% 100%;
-      --primary: 0 0% 100%;
-      --primary-foreground: 0 0% 0%;
-      --secondary: 0 0% 12%;
-      --secondary-foreground: 0 0% 100%;
-      --muted: 0 0% 12%;
-      --muted-foreground: 0 0% 60%;
-      --border: 0 0% 15%;
-    }
-  }
-
-  @layer base {
-    * { @apply border-border; }
-    body { @apply bg-background text-foreground font-sans antialiased transition-colors duration-500; scroll-behavior: smooth; }
-    
-    .text-architectural { @apply tracking-[-0.02em] leading-[1.1]; }
-    .text-minimal { @apply tracking-widest uppercase text-xs font-medium; }
-  }
-
-  /* --- Animații Scroll Reveal --- */
-  .scroll-reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .scroll-reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .delay-100 { transition-delay: 100ms; }
-  .delay-200 { transition-delay: 200ms; }
-  .delay-300 { transition-delay: 300ms; }
-  .delay-400 { transition-delay: 400ms; }
-
-  /* --- Butoane Premium Sweep --- */
-  .btn-sweep {
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .btn-sweep::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 100%; height: 0%;
-    background-color: hsl(var(--foreground));
-    transition: height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: -1;
-  }
-  .btn-sweep:hover::after { height: 100%; }
-  .btn-sweep:hover { color: hsl(var(--background)); }
-
-  /* --- Efect Hover Carduri --- */
-  .hover-card-lift {
-    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.5s ease;
-  }
-  .hover-card-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3);
-    border-color: hsl(var(--foreground) / 0.3);
-  }
-
-  /* --- Scroll Progress Bar --- */
-  #scroll-progress {
-    position: fixed; top: 0; left: 0; width: 0%; height: 3px;
-    background: hsl(var(--foreground));
-    z-index: 9999; transition: width 0.1s;
-  }
-
-  /* Lightbox Minimalist */
-  #lightbox {
-    display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-    justify-content: center; align-items: center; z-index: 2000;
-    opacity: 0; transition: opacity 0.4s ease; backdrop-filter: blur(5px);
-  }
-  #lightbox.active { opacity: 1; }
-  #lightbox img { max-width: 90%; max-height: 90%; border-radius: var(--radius); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-  #lightbox.active img { transform: scale(1); }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Iova Alex, fourth-year ETTI student focused on software engineering, full-stack development, automation and embedded systems.">
+  <meta name="theme-color" content="#090b10">
+  <title>Home | Iova Alex</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
-<body class="xl:pl-20"> <div id="scroll-progress"></div>
-
-<aside class="fixed top-1/2 -translate-y-1/2 left-6 z-50 hidden xl:flex flex-col gap-4 p-3 rounded-full bg-background/80 backdrop-blur-xl border border-border shadow-lg transition-all duration-300">
-  
-  <a href="#home" class="group relative p-3 rounded-full hover:bg-secondary hover:text-foreground text-muted-foreground transition-all flex items-center justify-center">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-    <span class="absolute left-16 px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-md">
-      Back to Top
-      <span class="absolute top-1/2 -translate-y-1/2 -left-1 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-foreground"></span>
-    </span>
-  </a>
-
-  <a href="mailto:iovaalex1234@gmail.com" class="group relative p-3 rounded-full hover:bg-secondary hover:text-foreground text-muted-foreground transition-all flex items-center justify-center">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-    <span class="absolute left-16 px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-md">
-      Email Me
-      <span class="absolute top-1/2 -translate-y-1/2 -left-1 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-foreground"></span>
-    </span>
-  </a>
-
-  <a href="tel:+40726621724" class="group relative p-3 rounded-full hover:bg-secondary hover:text-foreground text-muted-foreground transition-all flex items-center justify-center">
-    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-    <span class="absolute left-16 px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-md">
-      Call +40726621724
-      <span class="absolute top-1/2 -translate-y-1/2 -left-1 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-foreground"></span>
-    </span>
-  </a>
-
-  <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="group relative p-3 rounded-full hover:bg-secondary hover:text-foreground text-muted-foreground transition-all flex items-center justify-center">
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-    <span class="absolute left-16 px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-md">
-      LinkedIn Profile
-      <span class="absolute top-1/2 -translate-y-1/2 -left-1 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-foreground"></span>
-    </span>
-  </a>
-
-  <a href="https://github.com/JustAlexD" target="_blank" class="group relative p-3 rounded-full hover:bg-secondary hover:text-foreground text-muted-foreground transition-all flex items-center justify-center">
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-    <span class="absolute left-16 px-3 py-1.5 bg-foreground text-background text-xs font-bold rounded-md opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap shadow-md">
-      GitHub Profile
-      <span class="absolute top-1/2 -translate-y-1/2 -left-1 border-t-4 border-t-transparent border-b-4 border-b-transparent border-r-4 border-r-foreground"></span>
-    </span>
-  </a>
-</aside>
-
-<nav class="fixed top-0 w-full border-b border-border bg-background/70 backdrop-blur-xl z-40 transition-colors duration-500">
-  <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-    <a href="#home" class="font-bold text-xl tracking-tight hover:opacity-70 transition-opacity">Iova Alex.</a>
-    
-    <div class="hidden md:flex gap-8 items-center">
-      <a href="#home" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">Home<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-      <a href="#about" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">About<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-      <a href="#education" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">Education<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-      <a href="#projects" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">Projects<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-      <a href="#skills" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">Skills<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-      <a href="#contact" class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group">Contact<span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-foreground transition-all duration-300 group-hover:w-full"></span></a>
-    </div>
-
-    <button id="theme-toggle" class="px-4 py-2 rounded-full border border-border text-sm font-medium hover:bg-foreground hover:text-background transition-colors duration-300 flex items-center gap-2 shadow-sm">
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-      Theme
-    </button>
-  </div>
-</nav>
-
-<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/20 z-[-1]"></div>
-
-  <div class="scroll-reveal">
-    <div class="inline-flex items-center gap-3 border border-border rounded-full px-5 py-2 mb-8 bg-card shadow-sm hover:border-foreground/30 transition-colors">
-      <span class="relative flex h-3 w-3">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-      </span>
-      <span class="text-xs font-bold tracking-wide text-foreground uppercase">Open to Engineering Opportunities</span>
-    </div>
-  </div>
-  
-  <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-architectural mb-4 scroll-reveal delay-100">
-    Iova Alex
-  </h1>
-  <p class="text-lg md:text-xl text-muted-foreground max-w-2xl scroll-reveal delay-200 mb-2">
-    Electrical & Telecommunications Engineering Student
-  </p>
-  <p class="text-sm text-muted-foreground font-medium scroll-reveal delay-200 mb-8 flex items-center gap-2 justify-center">
-    📍 Bucharest, Romania
-  </p>
-  
-  <div class="scroll-reveal delay-300 mb-12">
-    <a href="IOVA_DUMITRU_ALEXANDRU_CV_2026_UPDATED.pdf" download class="inline-flex h-12 items-center justify-center rounded-lg bg-foreground px-8 text-sm font-bold text-background shadow-lg transition-transform hover:scale-105 active:scale-95">
-      Download CV
+<body>
+<header class="site-header">
+  <div class="shell nav-wrap">
+    <a class="brand" href="index.html" aria-label="Iova Alex home">
+      <span class="brand-mark">IA</span>
+      <span>Iova Alex</span>
     </a>
-  </div>
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mx-auto scroll-reveal delay-400">
-    <div class="bg-card border border-border p-6 rounded-2xl text-left hover-card-lift shadow-sm flex flex-col justify-between">
-      <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mb-4 border border-border">
-        <svg class="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-      </div>
-      <div>
-        <span class="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Hardware</span>
-        <h3 class="font-bold text-lg mt-1 text-foreground">Circuit Design</h3>
-      </div>
-    </div>
-    <div class="bg-card border border-border p-6 rounded-2xl text-left hover-card-lift shadow-sm flex flex-col justify-between">
-      <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mb-4 border border-border">
-        <svg class="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-      </div>
-      <div>
-        <span class="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Core Focus</span>
-        <h3 class="font-bold text-lg mt-1 text-foreground">Embedded Systems</h3>
-      </div>
-    </div>
-    <div class="bg-card border border-border p-6 rounded-2xl text-left hover-card-lift shadow-sm flex flex-col justify-between">
-      <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center mb-4 border border-border">
-        <svg class="w-5 h-5 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-      </div>
-      <div>
-        <span class="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Software</span>
-        <h3 class="font-bold text-lg mt-1 text-foreground">Full-Stack Dev</h3>
-      </div>
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html" class="">About</a>
+      <a href="experience.html" class="">Experience</a>
+      <a href="projects.html" class="">Projects</a>
+      <a href="skills.html" class="">Skills</a>
+      <a href="contact.html" class="">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="icon-btn theme-toggle" aria-label="Toggle theme" title="Toggle theme">
+        <span class="sun">☀</span><span class="moon">☾</span>
+      </button>
+      <button class="icon-btn menu-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
     </div>
   </div>
-</section>
-
-<section id="about" class="py-24 px-6 border-t border-border">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-12 scroll-reveal flex items-center gap-4">
-      01 / Professional Overview <span class="h-[1px] bg-border flex-1"></span>
-    </h2>
-    
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-      
-      <div class="lg:col-span-7 bg-card border border-border rounded-2xl p-8 md:p-10 shadow-sm scroll-reveal delay-100 flex flex-col justify-center">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 mb-8 border border-border rounded-full w-fit bg-secondary/50">
-          <span class="w-2 h-2 rounded-full bg-foreground"></span>
-          <span class="text-xs font-bold uppercase tracking-widest text-foreground">3rd Year</span>
-        </div>
-        
-        <p class="text-base text-muted-foreground/90 font-light leading-loose mb-6">
-          Third-year student at the Faculty of Electronics, Telecommunications and Information Technology, driven by a profound interest in bridging advanced hardware engineering with scalable software architecture.
-        </p>
-        <p class="text-base text-muted-foreground/90 font-light leading-loose mb-8">
-          I possess a strong foundation in modern programming languages (C/C++, Java, Python, JavaScript) and backend architectures (MySQL, REST APIs). On the hardware side, I have hands-on experience in electronic circuit design using OrCAD, system simulation with MATLAB, and developing embedded systems using Arduino IDE and ESP32. My academic journey covers the complete spectrum of technological development, from microcontrollers to full-stack software integration.
-        </p>
-
-        <div class="pt-6 border-t border-border mt-auto flex flex-col sm:flex-row sm:items-center gap-3">
-          <span class="text-xs text-foreground font-semibold uppercase tracking-wider bg-secondary px-3 py-1.5 rounded-md border border-border w-fit">Languages</span>
-          <p class="text-sm text-muted-foreground font-medium">Romanian (Native) &nbsp;•&nbsp; English (B2/C2)</p>
-        </div>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html" class="">About</a>
+    <a href="experience.html" class="">Experience</a>
+    <a href="projects.html" class="">Projects</a>
+    <a href="skills.html" class="">Skills</a>
+    <a href="contact.html" class="">Contact</a>
+  </nav>
+</header>
+<main>
+  <section class="hero shell">
+    <div class="hero-copy reveal">
+      <div class="eyebrow"><span class="status-dot"></span> Open to software engineering opportunities</div>
+      <h1>Engineering ideas into <span>working products.</span></h1>
+      <p class="hero-lead">Fourth-year ETTI student with hands-on experience in full-stack development, AI-assisted workflows, databases, automation and embedded systems.</p>
+      <div class="button-row">
+        <a class="btn primary" href="projects.html">Explore projects <span>→</span></a>
+        <a class="btn secondary" href="IOVA_DUMITRU_ALEXANDRU_CV_2026_UPDATED.pdf" download>Download CV</a>
       </div>
-
-      <div class="lg:col-span-5 flex flex-col gap-5">
-        
-        <div class="bg-gradient-to-br from-card to-background border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-200 relative overflow-hidden group h-full">
-          <div class="absolute inset-0 bg-foreground/[0.02] opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-            Hardware & Simulation
-          </h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">
-            Specialized in <strong class="text-foreground">Electronic Circuit Design</strong>, schematic capture, and PCB layout. Proficient in computational system simulation using <strong class="text-foreground">MATLAB</strong>, advanced circuit analysis with <strong class="text-foreground">OrCAD</strong>, and hardware description via <strong class="text-foreground">Verilog / Digital Design</strong>.
-          </p>
-        </div>
-
-        <div class="bg-card border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-300 relative h-full">
-          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-            Embedded Systems
-          </h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">
-            Developing robust microcontroller logic and firmware using <strong class="text-foreground">C/C++</strong>. Extensive experience with <strong class="text-foreground">Arduino IDE</strong> and <strong class="text-foreground">ESP32</strong>, including IoT integration, sensor interfacing, and implementing core communication protocols (I2C, SPI, UART, AT Commands).
-          </p>
-        </div>
-
-        <div class="bg-card border border-border rounded-2xl p-6 shadow-sm hover-card-lift scroll-reveal delay-400 relative h-full">
-          <h3 class="text-lg font-bold text-foreground mb-3 flex items-center gap-2">
-            <svg class="w-5 h-5 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-            Software & Web Dev
-          </h3>
-          <p class="text-muted-foreground text-sm leading-relaxed">
-            Programming in <strong class="text-foreground">C/C++, Java, Python</strong>. Architecting full web development with <strong class="text-foreground">JSP, Servlets (Jakarta EE), HTML, CSS, and JavaScript</strong>. Building solid backend architectures using <strong class="text-foreground">MySQL, Hibernate ORM, and REST APIs</strong> within the <strong class="text-foreground">Eclipse IDE</strong> ecosystem.
-          </p>
-        </div>
-
+      <div class="hero-meta">
+        <span>📍 Bucharest, Romania</span>
+        <span>ETTI · POLITEHNICA Bucharest</span>
       </div>
+    </div>
+    <aside class="hero-panel reveal delay-1">
+      <div class="panel-label">Current focus</div>
+      <div class="focus-card">
+        <span>01</span>
+        <div><strong>Full-stack development</strong><small>React · Next.js · TypeScript · Supabase</small></div>
+      </div>
+      <div class="focus-card">
+        <span>02</span>
+        <div><strong>Automation & integrations</strong><small>REST APIs · Apify · Apollo.io · Unipile</small></div>
+      </div>
+      <div class="focus-card">
+        <span>03</span>
+        <div><strong>Software foundations</strong><small>Java · MySQL · Hibernate · Jakarta EE</small></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="shell home-grid">
+    <a class="feature-card reveal" href="experience.html">
+      <span class="feature-kicker">Experience</span>
+      <h2>MakeITFuture</h2>
+      <p>University practice across web development, data workflows, migrations and AI-assisted product work.</p>
+      <span class="card-link">View experience →</span>
+    </a>
+    <a class="feature-card reveal delay-1" href="projects.html">
+      <span class="feature-kicker">Selected work</span>
+      <h2>Projects</h2>
+      <p>Lead-generation automation, Bubble migrations, React platforms, Java web apps and embedded prototypes.</p>
+      <span class="card-link">View projects →</span>
+    </a>
+    <a class="feature-card reveal delay-2" href="skills.html">
+      <span class="feature-kicker">Tech stack</span>
+      <h2>Skills</h2>
+      <p>A balanced stack spanning frontend, backend, databases, tooling, automation and electronics.</p>
+      <span class="card-link">View skills →</span>
+    </a>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <strong>Iova Alex</strong>
+      <p>Fourth-year ETTI student building software, automation and embedded systems.</p>
+    </div>
+    <div class="footer-links">
+      <a href="mailto:iovaalex1234@gmail.com">Email</a>
+      <a href="https://github.com/JustAlexD" target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" rel="noreferrer">LinkedIn</a>
     </div>
   </div>
-</section>
-
-<section id="education" class="py-24 px-6 border-t border-border bg-secondary/30">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-10 scroll-reveal flex items-center gap-4">
-      02 / Education <span class="h-[1px] bg-border flex-1"></span>
-    </h2>
-    
-    <div class="space-y-6">
-      <div class="flex flex-col md:flex-row gap-6 bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-100">
-        <div class="md:w-1/4">
-          <span class="inline-block px-3 py-1 bg-foreground text-background text-xs font-bold rounded-full mb-2">2023 - Present</span>
-        </div>
-        <div class="md:w-3/4">
-          <h3 class="text-2xl font-bold mb-2">Politehnica University of Bucharest</h3>
-          <p class="text-muted-foreground mb-6 text-lg">Faculty of Electronics, Telecommunications and Information Technology.<br><strong class="text-foreground">Degree:</strong> Bachelor's Degree - Microelectronics, Optoelectronics and Nanotechnologies (MON).</p>
-          <div class="pt-4 border-t border-border/50">
-            <p class="text-xs font-bold uppercase tracking-wider mb-3 text-foreground">Relevant Coursework</p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-4 py-1.5 bg-secondary text-xs rounded-full font-medium border border-border">Analog & Digital ICs</span>
-              <span class="px-4 py-1.5 bg-secondary text-xs rounded-full font-medium border border-border">Signals & Systems</span>
-              <span class="px-4 py-1.5 bg-secondary text-xs rounded-full font-medium border border-border">Electronic Devices</span>
-              <span class="px-4 py-1.5 bg-secondary text-xs rounded-full font-medium border border-border">Databases</span>
-              <span class="px-4 py-1.5 bg-secondary text-xs rounded-full font-medium border border-border">Computer Programming</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex flex-col md:flex-row gap-6 bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-200">
-        <div class="md:w-1/4">
-          <span class="inline-block px-3 py-1 bg-secondary text-foreground text-xs font-bold rounded-full mb-2 border border-border">2019 - 2023</span>
-        </div>
-        <div class="md:w-3/4">
-          <h3 class="text-xl font-bold mb-2">Gib Mihaescu National College</h3>
-          <p class="text-muted-foreground"><strong class="text-foreground">Specialization:</strong> Mathematics-Computer Science.<br>Location: Dragasani.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="py-24 px-6 border-t border-border">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-10 scroll-reveal flex items-center gap-4">
-      03 / Engineering Projects <span class="h-[1px] bg-border flex-1"></span>
-    </h2>
-    
-    <div class="grid grid-cols-1 gap-8">
-      
-      <div class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover-card-lift scroll-reveal delay-100 flex flex-col group">
-        <div class="p-8 md:p-10 border-b border-border bg-gradient-to-br from-card to-secondary/30">
-          <div class="flex justify-between items-start mb-4">
-            <h3 class="text-3xl font-bold">Database Project - MySQL</h3>
-            <span class="px-3 py-1 bg-foreground text-background text-xs font-bold rounded-full">Full Stack</span>
-          </div>
-          <p class="text-muted-foreground text-lg leading-relaxed mb-6">
-            Developed a database-driven web application using MySQL, implementing backend logic and REST APIs with <strong class="text-foreground">Java 21, Hibernate ORM, and JSP & Servlets</strong> (Jakarta EE), deployed on Apache Tomcat 11. Designed and built the user interface using HTML, CSS, and JavaScript, ensuring interaction between frontend and backend components. Worked with Eclipse IDE for development.
-          </p>
-        </div>
-        
-        <div class="p-8 bg-secondary/10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div class="relative group/img overflow-hidden rounded-xl border border-border shadow-sm bg-card">
-            <img src="poze/users.png" class="w-full h-56 object-cover cursor-pointer transition-transform duration-700 group-hover/img:scale-110 gallery-img" alt="Users">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent translate-y-full group-hover/img:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-5 pointer-events-none">
-              <div class="transform opacity-0 translate-y-4 group-hover/img:opacity-100 group-hover/img:translate-y-0 transition-all duration-500 delay-100">
-                <span class="inline-block px-2 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded mb-2">Users Table</span>
-                <p class="text-xs text-muted-foreground leading-relaxed">Displays the list of all users stored in the database. Perform add, edit, or delete operations easily on records.</p>
-              </div>
-            </div>
-          </div>
-          <div class="relative group/img overflow-hidden rounded-xl border border-border shadow-sm bg-card">
-            <img src="poze/os.png" class="w-full h-56 object-cover cursor-pointer transition-transform duration-700 group-hover/img:scale-110 gallery-img" alt="OS">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent translate-y-full group-hover/img:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-5 pointer-events-none">
-              <div class="transform opacity-0 translate-y-4 group-hover/img:opacity-100 group-hover/img:translate-y-0 transition-all duration-500 delay-100">
-                <span class="inline-block px-2 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded mb-2">Systems</span>
-                <p class="text-xs text-muted-foreground leading-relaxed">Presents all operating systems stored in the database. Each entry can be modified, deleted, or newly added.</p>
-              </div>
-            </div>
-          </div>
-          <div class="relative group/img overflow-hidden rounded-xl border border-border shadow-sm bg-card">
-            <img src="poze/installations.png" class="w-full h-56 object-cover cursor-pointer transition-transform duration-700 group-hover/img:scale-110 gallery-img" alt="Installations">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent translate-y-full group-hover/img:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-5 pointer-events-none">
-              <div class="transform opacity-0 translate-y-4 group-hover/img:opacity-100 group-hover/img:translate-y-0 transition-all duration-500 delay-100">
-                <span class="inline-block px-2 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded mb-2">Records</span>
-                <p class="text-xs text-muted-foreground leading-relaxed">Shows all recorded installations, including user, OS, date, and device, displayed in a structured UI table.</p>
-              </div>
-            </div>
-          </div>
-          <div class="relative group/img overflow-hidden rounded-xl border border-border shadow-sm bg-card lg:col-span-2">
-            <img src="poze/form.png" class="w-full h-56 object-cover object-top cursor-pointer transition-transform duration-700 group-hover/img:scale-110 gallery-img" alt="Form">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent translate-y-full group-hover/img:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-5 pointer-events-none">
-              <div class="transform opacity-0 translate-y-4 group-hover/img:opacity-100 group-hover/img:translate-y-0 transition-all duration-500 delay-100">
-                <span class="inline-block px-2 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded mb-2">Dynamic Form</span>
-                <p class="text-xs text-muted-foreground leading-relaxed">Installation form allowing selection of a user and an OS from dynamically populated dropdown lists retrieved from the database.</p>
-              </div>
-            </div>
-          </div>
-          <div class="relative group/img overflow-hidden rounded-xl border border-border shadow-sm bg-card">
-            <img src="poze/database.png" class="w-full h-56 object-cover cursor-pointer transition-transform duration-700 group-hover/img:scale-110 gallery-img" alt="Database UI">
-            <div class="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent translate-y-full group-hover/img:translate-y-0 transition-transform duration-500 ease-out flex flex-col justify-end p-5 pointer-events-none">
-              <div class="transform opacity-0 translate-y-4 group-hover/img:opacity-100 group-hover/img:translate-y-0 transition-all duration-500 delay-100">
-                <span class="inline-block px-2 py-1 bg-foreground text-background text-[10px] font-bold uppercase tracking-widest rounded mb-2">UI Layout</span>
-                <p class="text-xs text-muted-foreground leading-relaxed">The JSP/HTML user interface is designed for a simple, intuitive experience, structured for quick access to functionalities.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-200">
-          <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-6 border border-border">
-            <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-4">Laser Detection System</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Built a laser-based security system using an ESP32 and SIM800L GSM module for automatic call alerts. Used a laser, photodiode, buzzer, and capacitor for detection, alarm signaling, and power stability. Implemented the logic in Arduino IDE (C/C++), handling sensor input and GSM communication via AT commands.
-          </p>
-        </div>
-
-        <div class="bg-card border border-border rounded-2xl p-8 shadow-sm hover-card-lift scroll-reveal delay-300">
-          <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center mb-6 border border-border">
-            <svg class="w-6 h-6 text-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-          </div>
-          <h3 class="text-2xl font-bold mb-4">Low-Frequency Voltage Amplifier</h3>
-          <p class="text-muted-foreground leading-relaxed">
-            Designed and simulated an amplifier using OrCAD 17.2. Analyzed circuit behavior and verified performance through simulation. Practical implementation of the amplifier in the laboratory is currently in progress.
-          </p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="skills" class="py-24 px-6 border-t border-border bg-secondary/30">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-10 scroll-reveal flex items-center gap-4">
-      04 / Tech Stack <span class="h-[1px] bg-border flex-1"></span>
-    </h2>
-    
-    <div class="flex flex-wrap gap-4 scroll-reveal delay-100">
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">C/C++</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Java</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Python</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">JavaScript</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">MySQL</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Hibernate ORM</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">REST APIs</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">JSP & Servlets</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">HTML & CSS</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">MATLAB</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">OrCAD</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Verilog</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Eclipse IDE</div>
-      <div class="btn-sweep px-6 py-3 border border-border rounded-lg font-medium shadow-sm bg-card cursor-default">Arduino IDE</div>
-    </div>
-  </div>
-</section>
-
-<section id="volunteering" class="py-24 px-6 border-t border-border">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-10 scroll-reveal flex items-center gap-4">
-      05 / Volunteering <span class="h-[1px] bg-border flex-1"></span>
-    </h2>
-    
-    <div class="bg-card border border-border rounded-2xl p-8 md:p-12 shadow-sm hover-card-lift scroll-reveal delay-100">
-      <div class="flex items-center gap-4 mb-6">
-        <div class="w-3 h-3 rounded-full bg-foreground animate-pulse"></div>
-        <h3 class="text-2xl font-bold">Electronics Students League (LSE)</h3>
-      </div>
-      <p class="text-lg text-muted-foreground mb-8">Active volunteer since the first year of university, contributing to the organization and coordination of major student and international events.</p>
-      
-      <ul class="space-y-6 text-muted-foreground">
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-foreground flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span class="text-lg">Supported the planning and execution of <strong class="text-foreground">RoboChallenge</strong>, an international robotics competition with participants from over 30 countries.</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-foreground flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span class="text-lg">Contributed to the organization of <strong class="text-foreground">LAN Party</strong>, the largest student esports competition, helping manage event logistics and technical infrastructure.</span>
-        </li>
-        <li class="flex items-start gap-3">
-          <svg class="w-6 h-6 text-foreground flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-          <span class="text-lg">Assisted in the setup and coordination of technical equipment, event spaces, and participant areas.</span>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="contact" class="py-32 px-6 border-t border-border bg-gradient-to-b from-transparent to-secondary/50 text-center relative overflow-hidden">
-  <div class="max-w-2xl mx-auto relative z-10 scroll-reveal">
-    <h2 class="text-5xl md:text-6xl font-black text-architectural mb-6">Initialize Connection.</h2>
-    <p class="text-xl text-muted-foreground mb-12">Looking forward to new technical challenges.</p>
-    
-    <div class="flex flex-col items-center gap-6 mb-12 bg-card border border-border p-8 rounded-2xl shadow-sm">
-      <a href="mailto:iovaalex1234@gmail.com" class="text-xl font-medium hover:text-muted-foreground transition-colors flex items-center gap-3">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        iovaalex1234@gmail.com
-      </a>
-      <a href="mailto:dumitru.iova@stud.etti.upb.ro" class="text-xl font-medium hover:text-muted-foreground transition-colors flex items-center gap-3">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-        dumitru.iova@stud.etti.upb.ro
-      </a>
-      <span class="text-xl font-medium text-foreground flex items-center gap-3">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-        +40726621724
-      </span>
-    </div>
-
-    <div class="flex justify-center gap-6">
-      <a href="https://github.com/JustAlexD" target="_blank" class="btn-sweep inline-flex h-14 items-center justify-center rounded-lg border border-border bg-card px-10 text-sm font-bold shadow-sm transition-colors focus-visible:outline-none hover:scale-105 transform duration-300">
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-        GitHub
-      </a>
-      <a href="https://www.linkedin.com/in/dumitru-alexandru-iova-7794963b9/" target="_blank" class="btn-sweep inline-flex h-14 items-center justify-center rounded-lg border border-border bg-card px-10 text-sm font-bold shadow-sm transition-colors focus-visible:outline-none hover:scale-105 transform duration-300">
-        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-        LinkedIn
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer class="py-10 text-center border-t border-border text-sm font-medium text-muted-foreground bg-background">
-  <p>© 2026 Iova Alex</p>
-  <p class="mt-2 text-xs opacity-60">Engineered for the future.</p>
+  <div class="shell footer-bottom">© <span data-year></span> Iova Alex. Built for the web.</div>
 </footer>
-
-<div id="lightbox" onclick="this.classList.remove('active'); setTimeout(() => this.style.display='none', 400)">
-  <img id="lightbox-img" src="" alt="Zoomed image">
-</div>
-
-<script>
-  // Elimină automat referințele dacă apar
-  document.addEventListener("DOMContentLoaded", () => {
-    document.body.innerHTML = document.body.innerHTML.replace(/\+\]/g, '');
-    reinitListeners(); 
-  });
-
-  function reinitListeners() {
-    // Theme Toggle Logic
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
-
-    themeToggle?.addEventListener('click', () => {
-      htmlElement.classList.toggle('dark');
-    });
-
-    // Lightbox Logic
-    const images = document.querySelectorAll('.gallery-img');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-
-    images.forEach(img => {
-      img.addEventListener('click', (e) => {
-        e.stopPropagation();
-        lightbox.style.display = 'flex';
-        setTimeout(() => lightbox.classList.add('active'), 10);
-        lightboxImg.src = img.src;
-      });
-    });
-
-    // Intersection Observer for Scroll Animations
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target); 
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.scroll-reveal').forEach(el => {
-      observer.observe(el);
-    });
-  }
-
-  // Scroll Progress Bar Logic
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const progressBar = document.getElementById("scroll-progress");
-    if(progressBar) progressBar.style.width = scrolled + "%";
-  });
-</script>
-
 </body>
 </html>
